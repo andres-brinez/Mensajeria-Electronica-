@@ -31,7 +31,11 @@ def validarUsuario():
         
         # si es correcto la contraseña y el usuario
         if validacion == True:
-            return render_template('index.html')
+            Destinatarios=controller.ListaDestinatarios(usuario) # trae la lista de todos los destinatarios menos el logueado 
+            numero_destinatarios=len(Destinatarios) 
+            Destinatarios.append(numero_destinatarios) # se agrega el numero de destinatarios al final de la lista
+            
+            return render_template('index.html',destinatarios=Destinatarios) 
         else :
             mensajeError= "Error de autenticación - Usuario o contraseña incorrectos -verifique los datos ingresados"
             # envíar el mensaje a la  plantilla html
@@ -64,7 +68,9 @@ def RegistrarUsuario():
         # enviar el correo con el codigo de activación
         asuntoEmail="Activación de cuenta"
         mensajeEmail="MENSAJERÍA ELECTRÓNICA \n\n Sr "+nombre+",  su código de activacion es :\n\n"+codigoActivacion+ "\n\n Recuerde copiarlo y pegarlo para validarlo en la seccion de login y activar su cuenta.\n\nMuchas Gracias"
-        EnvioEmail.enviar(email,mensajeEmail,asuntoEmail) 
+        
+        # TODO al desplegar el proyecto descomentar enviarEmail
+        # EnvioEmail.enviar(email,mensajeEmail,asuntoEmail) 
         
         mensaje= f"Usuario {nombre} registrado correctamente"
         return render_template('informacion.html',mensajes=mensaje)

@@ -54,13 +54,21 @@
                       
                       <form>
                         <input required id="txtAsunto" name="txtAsunto" max="50" type="text" class="form-control" placeholder="Asunto">
+                        
+                        <!-- recorre los destinatarios  que fueron enviados desde app.py -->
+                    
+                        <select class="form-control" id="sl_destino " nme="sl_destino" >
+                          <option values="">Seleccione el destinatario</option>
+
+                          <!-- destinatario devuelve  una lista con tuplas , se debe acceder a cada una de  las  tuplas de la lista-->
+                          {% for i in range (0,destinatarios[-1]) %}
+                          <option value="{{destinatarios[i][2]}}">{{destinatarios[i][3]}}</option>                          
+                          {% endfor %}
+                        </select>
+
                         <textarea required id="txtMensaje" class="form-control" name="txtMensaje"  placeholder="Mensaje" ></textarea>
                         <center><button type="submit" class="btn btn-success">Enviar</button>
-                        <!--  <selected class="form-control">
-                        <option>Seleccione un tipo de envio</option>
-                        <option>Envio masivo</option>
-                        <option>Envio individual</option>
-                      </selected> -->
+                        
                       </form>
                       
                     </div>

@@ -114,5 +114,46 @@ def ActivarUsuarioDB(codigoActivacion):
         print("Error al traer los datos: " + str(e))    
     
 
+def ListaDestinatarios(usuarioLogueado):
+      
+    try:
+        
+        conexion=conexionDB()
+        
+        
+        conexion.autocommit = True 
+        
+        # crear cursor el cual es el que ejecuta las consultas sql
+        cursor = conexion.cursor()
+        
+        #selecciona los destinatarios (usuarios) que no sean el usuario logueado
+        sql= "SELECT * FROM usuarios WHERE correo != '"+usuarioLogueado+"';"
+        
+        # ejecutar sentencia 
+        cursor.execute(sql)
+        
+        # se obtiene lo datos
+        resultado=cursor.fetchall()
+        print(resultado)
+        
+        # para indicar si existe  o no existe
+        # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
+        if (len(resultado)>0):
+            return resultado # existe 
+        else :
+            return False # no existe
+        
+        
+        
+        # # mostrar los datos
+        # print("Datos ")
+        # for usuario in resultado:
+        #     print(usuario)
+            
+    
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+
+
 
 

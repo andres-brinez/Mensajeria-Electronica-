@@ -60,7 +60,7 @@ def validarUsuarioDB(usuario,contrasena):
         print("Error al traer los datos: " + str(e))
 
 
-def registrarUsuarioDB(usuario,contrasena,email):
+def registrarUsuarioDB(usuario,contrasena,email,codigoActivacion):
     try:
         
         conexion=conexionDB()
@@ -71,12 +71,46 @@ def registrarUsuarioDB(usuario,contrasena,email):
         cursor = conexion.cursor()
         
         # sentencia sql para registrar usuario
-        sql= "INSERT INTO usuarios (usuario,password,correo) VALUES ('"+usuario+"','"+contrasena+"','"+email+"');"
+        
+        # sentencia sql para registrar usuario
+        sql= "INSERT INTO usuarios (usuario,password,correo,"+'"codigoActivacion"'+") VALUES ('"+usuario+"','"+contrasena+"','"+email+"','"+codigoActivacion+"');"
         
         # ejecutar sentencia 
         cursor.execute(sql)
         
     except Exception as e:
+        print("Error al traer los datos: " + str(e))    
+    
+
+def ActivarUsuarioDB(codigoActivacion):
+    try:
+        
+        conexion=conexionDB()
+        
+        conexion.autocommit = True 
+        
+        # crear cursor el cual es el que ejecuta las consultas sql
+        cursor = conexion.cursor()
+                
+        # sentencia sql 
+        # el usuario que tenga el codigo ingresado, el estado cambie a activo(true)
+        sql= "UPDATE usuarios SET estado='true' WHERE "+'"codigoActivacion"'+"="+"'"+codigoActivacion+"';"
+        
+        # ejecutar sentencia 
+        cursor.execute(sql)
+        
+        # para saber si el usuario se activo o no
+        sql2= "SELECT * FROM usuarios WHERE "+'"codigoActivacion"'+"="+"'"+codigoActivacion+"'"+"AND estado='true'"+";"
+        
+        cursor.execute(sql2)
+        
+        # respuesta de la consulta, si devuelve algo es porque se hizo el cambio
+        respuesta=cursor.fetchall()
+    
+        return respuesta
+        
+    except Exception as e:
+        
         print("Error al traer los datos: " + str(e))    
     
 

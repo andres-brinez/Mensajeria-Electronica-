@@ -1,0 +1,25 @@
+<!-- extender de  la plantilla base -->
+{%extends 'base.html'%} 
+
+
+{% block title%} Ejemplo Formulario {% endblock %}
+
+{% block body %}
+<p>Este es  un ejemplo de como usar un formulario con python</p>
+
+<form action="" method="POST">
+
+  {{ form.csrf_token }} <!-- esto es un token para evitar ataques -->
+
+  <h1>Formulario ejemplo</h1>
+
+  <!-- crea las etiquetas label e input -->  
+  {{ form.usuario.label }}
+  {{ form.usuario}}
+  {{ form.password.label }}
+  {{ form.password }}
+
+
+
+</form>
+{% endblock %}

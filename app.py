@@ -35,7 +35,7 @@ def login ():
         print("formulario enviado correctamente")
         usuario=form.usuario.data # obtener el valor del campo usuario
         print(usuario)
-        """ flashhace posible grabar un mensaje al final de una solicitud y
+        """ flash hace posible grabar un mensaje al final de una solicitud y
         acceder a él en la siguiente solicitud. """
         flash("Bienvenido "+usuario) #  mensaje de bienvenida
         return redirect(url_for('inicio')) # redireccionar a la ruta hola_mundo

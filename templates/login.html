@@ -5,8 +5,8 @@
 {% block title%} Login {% endblock %}
 
 {% block body %}
-<!-- action es donde dirige al envíar el formulario -->
-<form action="/inicio" method="POST">
+<!-- lo que se hace al envíar el formulario se programa en las rutas (app - /login) -->
+<form action="" method="POST">
     {{ form.csrf_token }} <!-- esto es un token para evitar ataques -->
 
     <h1>Sign in</h1>
@@ -17,8 +17,9 @@
     {{form.submit}}
 
     <p id="error">{{error}}</p>
-    <a href="Register">Registrarce</a>
+    <a href="register">Registrarce</a>
     <a href="Activate">Activar cuenta</a> 
+    <a href="recuperacion">¿Olvidaste tu Contraseña?</a>
 
 </form>
 {% endblock %}

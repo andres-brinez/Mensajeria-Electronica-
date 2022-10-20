@@ -1,5 +1,5 @@
 # Importar el objeto Flask desde el paquete flask.
-from flask import Flask,render_template
+from flask import Flask,render_template,redirect,url_for,flash
 import os # Importar el módulo os para poder acceder a las variables de entorno.
 
 from forms.forms  import * #  importar la carpeta de  los formularios con los formularios
@@ -29,6 +29,15 @@ def ejemploForm ():
 @app.route('/login',methods=['GET','POST'])
 def login ():
     form=FormLogin() # instanciar el formulario
+
+    # validar si el formulario fue envíado correctamente
+    if(form.validate_on_submit()):
+        print("formulario enviado correctamente")
+        usuario=form.usuario.data # obtener el valor del campo usuario
+        print(usuario)
+        flash("Bienvenido "+usuario) # mostrar mensaje de bienvenida
+        return redirect(url_for('inicio')) # redireccionar a la ruta hola_mundo
+    
     return render_template('login.html',form=form) # renderizar el template login.htmt 
 
 # register
@@ -36,6 +45,14 @@ def login ():
 def register():
     form=FormRegister() # instanciar el formulario
     return render_template('register.html',form=form)
+
+
+# recuperación contraseñas
+@app.route('/recuperacion',methods=['GET','POST'])
+def RecuperarContrasena():
+    form=FormRegister() # instanciar el formulario
+    # return render_template('register.html',form=form)
+    return 'aquí va la recuperación de contraseñas'
 
 # inicio
 @app.route('/inicio',methods=['GET','POST'])

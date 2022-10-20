@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-</head>
-<body>
-    <p>{{nombre}}</p>
-</body>
-</html>
+
+<!-- extender de  la plantilla base -->
+{%extends 'base.html'%} 
+<!-- {% block style %}<link rel="stylesheet" href="/static/css/form.css" />{% endblock %}>  -->
+
+{% block title%} Inicio {% endblock %}
+
+{% block body %}
+
+    {% with messages = get_flashed_messages() %} <!-- obtiene los mensajes flash --> 
+        {% if messages %} <!-- si hay mensajes -->
+            
+            {% for message in messages %} <!-- Recorre los mensajes -->
+            <p>{{ message }}</p>
+            {% endfor %}
+            
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}
+

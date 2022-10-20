@@ -19,26 +19,29 @@ app.secret_key = os.urandom(24) # Generar una clave secreta de 24 caracteres par
 def hola_mundo(): # lo que realiza al acceder a  la ruta
     return render_template('index.html',nombre="felipe") # renderiza el template index.html
 
+# Ejemplo de formulario
+@app.route('/form',methods=['GET','POST'])
+def ejemploForm ():
+    form=FormEjemplo() # instanciar el formulario
+    return render_template('formularioEjemplo.html',form=form) # renderizar el template login.htmt 
+
 # login
 @app.route('/login',methods=['GET','POST'])
 def login ():
-    form=FormEjemplo() # instanciar el formulario
+    form=FormLogin() # instanciar el formulario
     return render_template('login.html',form=form) # renderizar el template login.htmt 
 
 # register
 @app.route('/register',methods=['GET','POST'])
 def register():
-    return render_template('register.html')
+    form=FormRegister() # instanciar el formulario
+    return render_template('register.html',form=form)
 
 # inicio
 @app.route('/inicio',methods=['GET','POST'])
 def inicio():
     return 'inicio'
 
-# Ejemplo de formulario
-@app.route('/form',methods=['GET','POST'])
-def ejemploForm ():
-    form=FormEjemplo() # instanciar el formulario
-    return render_template('formularioEjemplo.html',form=form) # renderizar el template login.htmt 
+
 
 

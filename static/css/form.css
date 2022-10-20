@@ -55,7 +55,7 @@ input:focus{
     
 }
 
-button{
+input[type="submit"]{
     width: 105%;
     height: 50px;
     border: none;

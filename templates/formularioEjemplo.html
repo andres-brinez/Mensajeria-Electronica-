@@ -6,18 +6,31 @@
 
 {% block body %}
 <p>Este es  un ejemplo de como usar un formulario con python</p>
+<br>
 
 <form action="" method="POST">
 
   {{ form.csrf_token }} <!-- esto es un token para evitar ataques -->
 
-  <h1>Formulario ejemplo</h1>
-
   <!-- crea las etiquetas label e input -->  
-  {{ form.usuario.label }}
-  {{ form.usuario}}
+
+  <label for="" class="ejemplo">{{ form.usuario.label }}</label>
+  <!-- poner placeholder -->
+  {{ form.usuario(class="ejemplo", placeholder="Usuario" )}}
+  <br>
+  <br>
+
   {{ form.password.label }}
-  {{ form.password }}
+  {{ form.password(size=30) }}
+  <br>
+  <br>
+  
+  {{form.recordar.label}}
+  {{form.recordar}}
+  <br>
+  <br>
+
+  {{form.submit}}
 
 
 

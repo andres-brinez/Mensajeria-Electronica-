@@ -1,0 +1,5 @@
+Modifica la ruta a cada archivo de la forma:
+
+href="{{ url_for('static', filename='css/miEstilo.css') }}"
+src="{{ url_for('static', filename='js/validacion.js') }}"
+src="{{ url_for('static', filename='images/view.png') }}"

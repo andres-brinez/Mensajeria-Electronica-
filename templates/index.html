@@ -1,0 +1,21 @@
+
+<!-- extender de  la plantilla base -->
+{%extends 'base.html'%} 
+<!-- {% block style %}<link rel="stylesheet" href="/static/css/form.css" />{% endblock %}>  -->
+
+{% block title%} Inicio {% endblock %}
+
+{% block body %}
+
+    {% with messages = get_flashed_messages() %} <!-- obtiene los mensajes flash --> 
+        {% if messages %} <!-- si hay mensajes -->
+            
+            {% for message in messages %} <!-- Recorre los mensajes -->
+            <p>{{ message }}</p>
+            {% endfor %}
+            
+        {% endif %}
+    {% endwith %}
+
+{% endblock %}
+

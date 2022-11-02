@@ -1,0 +1,8 @@
+se debe saber si tiene python instalado con Python --version de  lo contrario se debe instalar
+1 acceder al proyecto desde el cmd
+2 Crear un entorno - py -3 -m venv venv
+3 Activar el entorno - venv\Scripts\activate
+4 Instalar flask en el entorno - pip install Flask
+
+Ejecuta el siguiente comando para instalar Flask-WTF - sirve para los formularios
+5 pip install flask-wtf

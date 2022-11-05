@@ -26,15 +26,26 @@ def conexionDB():
     
     except Exception as error:
         print("Error Conexión",error )
+        
+
+def ejecutarSentenciaSQL(sentenciaSQL):
+    
+    conexion=conexionDB() # conexión con la base de datos
+    
+    conexion.autocommit = True 
+    
+    # crear cursor el cual es el que ejecuta las consultas sql
+    cursor = conexion.cursor()
+    
+    # ejecutar sentencia 
+    cursor.execute(sentenciaSQL)
+    
+    cursor.close();
+
 
 
 def registrarUsuarioDB(usuario,contrasena,email,):
     try:
-        
-        conexion=conexionDB()
-        conexion.autocommit = True 
-        # crear cursor el cual es el que ejecuta las consultas sql
-        cursor = conexion.cursor()
         
         # generar código de activación
         # el codigo es la fecha y hora actual (cuando se registra el usuario)
@@ -53,11 +64,11 @@ def registrarUsuarioDB(usuario,contrasena,email,):
         # sentencia sql para registrar usuario
         sql= "INSERT INTO usuarios (estado,name,password,correo,"+'"codigoActivacion"'+") VALUES ('false','"+usuario+"','"+ password_codificada+"','"+email+"','"+codigoActivacion+"');"
         print(sql)
-        # ejecutar sentencia 
-        cursor.execute(sql)
+        
+        ejecutarSentenciaSQL(sql)
         
         return True
         
     except Exception as e:
-        # print("Error al traer los datos: " + str(e))  
+        print("Error al traer los datos: " + str(e))  
         return False 

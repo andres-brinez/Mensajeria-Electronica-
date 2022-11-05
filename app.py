@@ -1,8 +1,10 @@
 # Importar el objeto Flask desde el paquete flask.
 from flask import Flask,render_template,redirect,url_for,flash
 import os # Importar el módulo os para poder acceder a las variables de entorno.
-from database import controller as  DB
 from forms.forms  import * #  importar la carpeta de  los formularios con los formularios
+from database import controller as  DB
+from utils import EnvioEmail
+
 
 """ Crear instancia de aplicación Flask con el nombre app. Pasa la variable especial __name__ que
 contiene el nombre del módulo Python actual. Se utiliza para indicar a la instancia dónde está
@@ -57,12 +59,19 @@ def register():
     # otra forma de  validar porque en el momento form.validate_on_submit() no me sirivió
     # si los campos están llenos es decir que  no son None  es  porque el formualrio se envió
     if  nombre!=None and email!=None and password!=None:
-        print('formulario enviado ')
-        print(f"nombre: {nombre} /n email: {email} /n pasword: {password}")
-        return redirect(url_for('register',register='ok')) # redireccionar a la ruta hola_mundo
+        
+        registro= DB.registrarUsuarioDB(nombre,password,email) #devuelve true o false si pudo registrar usuario 
+        
+        if registro:
+            return redirect(url_for('register',register='ok')) # redireccionar a la ruta hola_mundo
+        
+        else :
+            return redirect(url_for('register',register='false')) # redireccionar a la ruta hola_mundo
+
+            
 
         
-    print('registro usuario')
+    print('registrando  usuario')
     return render_template('register.html',form=form)
 
 

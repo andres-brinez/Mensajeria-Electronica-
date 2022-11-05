@@ -31,6 +31,14 @@
         'Al correo registrado fue envíado un código para activar la cuenta',
         'success'
       );
-    } 
+    }
+    else if (url.indexOf('register=false') > -1) {
+      // mostrar mensaje
+      Swal.fire(
+      'Error el registrar el usuario',
+      ':( :(',
+      'error'
+      );
+    }
   </script>
 {% endblock %}

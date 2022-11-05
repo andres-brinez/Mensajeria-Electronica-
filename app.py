@@ -1,7 +1,7 @@
 # Importar el objeto Flask desde el paquete flask.
 from flask import Flask,render_template,redirect,url_for,flash
 import os # Importar el módulo os para poder acceder a las variables de entorno.
-
+from database import controller as  DB
 from forms.forms  import * #  importar la carpeta de  los formularios con los formularios
 
 """ Crear instancia de aplicación Flask con el nombre app. Pasa la variable especial __name__ que
@@ -33,19 +33,36 @@ def login ():
     # validar si el formulario fue envíado correctamente
     if(form.validate_on_submit()):
         print("formulario enviado correctamente")
+        
         usuario=form.usuario.data # obtener el valor del campo usuario
-        print(usuario)
+                
         """ flash hace posible grabar un mensaje al final de una solicitud y
         acceder a él en la siguiente solicitud. """
         flash("Bienvenido "+usuario) #  mensaje de bienvenida
-        return redirect(url_for('inicio')) # redireccionar a la ruta hola_mundo
+        return redirect(url_for('inicio')) # redireccionar a la ruta 
     
     return render_template('login.html',form=form) # renderizar el template login.htmt 
 
-# register
+# # register
 @app.route('/register',methods=['GET','POST'])
 def register():
+    
     form=FormRegister() # instanciar el formulario
+    
+    # trae los datos del formulario
+    nombre=form.name.data
+    email=form.email.data
+    password=form.email.data
+    
+    # otra forma de  validar porque en el momento form.validate_on_submit() no me sirivió
+    # si los campos están llenos es decir que  no son None  es  porque el formualrio se envió
+    if  nombre!=None and email!=None and password!=None:
+        print('formulario enviado ')
+        print(f"nombre: {nombre} /n email: {email} /n pasword: {password}")
+        return redirect(url_for('register',register='ok')) # redireccionar a la ruta hola_mundo
+
+        
+    print('registro usuario')
     return render_template('register.html',form=form)
 
 

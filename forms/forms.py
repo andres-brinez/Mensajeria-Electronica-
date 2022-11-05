@@ -21,6 +21,6 @@ class FormRegister(FlaskForm):
     name = StringField('Usuario', validators=[DataRequired(message='Este campo es requerido')])
     email = EmailField('Correo', validators=[DataRequired(message='Este campo es requerido')])
     password = PasswordField('Contraseña', validators=[DataRequired(message='Campo vacio ')])
-    submit=SubmitField('Login')
+    submit=SubmitField('Registrarce')
     
     

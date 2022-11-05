@@ -32,14 +32,14 @@ def ejecutarSentenciaSQL(sentenciaSQL):
     
     conexion=conexionDB() # conexión con la base de datos
     
-    conexion.autocommit = True 
-    
     # crear cursor el cual es el que ejecuta las consultas sql
     cursor = conexion.cursor()
     
     # ejecutar sentencia 
     cursor.execute(sentenciaSQL)
     
+    conexion.autocommit = True  # para guardar la sentencia 
+
     cursor.close();
 
 

@@ -36,14 +36,22 @@ def login ():
     if(form.validate_on_submit()):
         print("formulario enviado correctamente")
         
-        usuario=form.usuario.data # obtener el valor del campo usuario
-                
-        """ flash hace posible grabar un mensaje al final de una solicitud y
-        acceder a él en la siguiente solicitud. """
-        flash("Bienvenido "+usuario) #  mensaje de bienvenida
-        return redirect(url_for('inicio')) # redireccionar a la ruta 
+        usuario=form.usuario.data 
+        password=form.password.data  
+
+        if DB.validarUsuarioDB(usuario,password): # si devuelve true
+          
+            """ flash hace posible grabar un mensaje al final de una solicitud y
+            acceder a él en la siguiente solicitud. """
+            flash("Bienvenido "+usuario) #  mensaje de bienvenida
+            return redirect(url_for('inicio')) # redireccionar a la ruta 
+        
+        flash("Usuario o contraseña incorrecta ")
+        return redirect(url_for('login')) # redireccionar a la ruta 
+
     
-    return render_template('login.html',form=form) # renderizar el template login.htmt 
+    return render_template('login.html',form=form) # renderizar el template login.htmt
+
 
 # # register
 @app.route('/register',methods=['GET','POST'])
@@ -52,13 +60,12 @@ def register():
     # si se envía el formulario por el metodo post 
     if  request.method=='POST':
         
-        form=FormRegister() # instanciar el formulario
 
         print('envio formulario')
         
         # trae los datos del formulario
         #asigna el valor  valor enviado desde formulario a la variable
-        nombre=request.form["nombre"]   
+        nombre=request.form["name"]   
         email=request.form["email"]
         password=request.form["password"]
         
@@ -72,6 +79,7 @@ def register():
 
     else:
         print('registrando  usuario')
+        form=FormRegister() # instanciar el formulario
         return render_template('register.html',form=form)
 
 

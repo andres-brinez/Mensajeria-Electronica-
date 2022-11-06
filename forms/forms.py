@@ -23,4 +23,8 @@ class FormRegister(FlaskForm):
     password = PasswordField('Contraseña', validators=[DataRequired(message='Campo vacio ')])
     submit=SubmitField('Registrarce')
     
+
+
+    
+    
     

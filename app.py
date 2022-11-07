@@ -1,5 +1,5 @@
 # Importar el objeto Flask desde el paquete flask.
-from flask import Flask,render_template,redirect,url_for,flash,request
+from flask import Flask,render_template,redirect,url_for,flash,request,session
 import os # Importar el módulo os para poder acceder a las variables de entorno.
 from forms.forms  import * #  importar la carpeta de  los formularios con los formularios
 from database import controller as  DB
@@ -38,9 +38,9 @@ def login ():
         
         usuario=form.usuario.data 
         password=form.password.data  
-
+        
         if DB.validarUsuarioDB(usuario,password): # si devuelve true
-          
+
             """ flash hace posible grabar un mensaje al final de una solicitud y
             acceder a él en la siguiente solicitud. """
             flash("Bienvenido "+usuario) #  mensaje de bienvenida
@@ -94,6 +94,8 @@ def RecuperarContrasena():
 @app.route('/inicio',methods=['GET','POST'])
 def inicio():
     return render_template('index.html')
+
+
 
 
 

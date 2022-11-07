@@ -2,6 +2,7 @@
 import psycopg2
 # se debe instalar psycopg2 para trabajar con la base de datos postgres, para usar otra base de datos se  utiliza otra libreria
 
+from flask import session
 from datetime import datetime # para el tiempo
 from utils import EnvioEmail
 import hashlib # hashlib sirve para encriptar las contraseñas
@@ -90,7 +91,6 @@ def validarUsuarioDB(usuario,contrasena):
         
         # sentencia sql para validar el usuario
         sql= "SELECT * FROM usuarios WHERE correo= '"+usuario+"' AND password= '"+password_codificada+"';"
-        print(sql)
         
         # ejecutar sentencia y obtenes resultado
         resultado= ejecutarSentenciaSQL(sql)
@@ -98,7 +98,18 @@ def validarUsuarioDB(usuario,contrasena):
         # para indicar si existe  o no existe
         # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
         if (len(resultado)>0):
+            # borra las  sesiones anteriores
+            session.clear();
+            
+        
+            # crear la sesión del usuario logeado
+            # se  puede guardar lo que quiera del usuario logeado
+            session['id']=resultado[0][0]
+            session['userName']=resultado[0][1]
+            print(session)
+            print(len(session))
             return True # existe 
+        
         else :
             return False # no existe
     

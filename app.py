@@ -93,7 +93,11 @@ def RecuperarContrasena():
 # inicio
 @app.route('/inicio',methods=['GET','POST'])
 def inicio():
-    return render_template('index.html')
+    
+    if 'id' in session:
+        return render_template('index.html')
+    else:
+        return 'inicia sesión para poder acceder a está página  '
 
 
 

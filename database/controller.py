@@ -8,7 +8,6 @@ from utils import EnvioEmail
 import hashlib # hashlib sirve para encriptar las contraseñas
 
 
-
 def conexionDB():
     """ SE CONECTA CON LA BASE DE DATOS """
     try:
@@ -100,12 +99,12 @@ def validarUsuarioDB(usuario,contrasena):
         if (len(resultado)>0):
             # borra las  sesiones anteriores
             session.clear();
-            
         
             # crear la sesión del usuario logeado
             # se  puede guardar lo que quiera del usuario logeado
             session['id']=resultado[0][0]
             session['userName']=resultado[0][1]
+            
             print(session)
             print(len(session))
             return True # existe 
@@ -116,3 +115,51 @@ def validarUsuarioDB(usuario,contrasena):
     except Exception as e:
         print("Error al traer los datos: " + str(e))
         
+
+def ListaDestinatarios(idUsuario):
+      
+    try:
+        
+        #selecciona los destinatarios (usuarios) que no sean el usuario logueado
+        sql= f"SELECT name FROM usuarios WHERE id != {idUsuario};"
+        
+        resultado= ejecutarSentenciaSQL(sql)
+        
+        print(resultado)
+        
+        return resultado
+    
+        # # mostrar los datos
+        # print("Datos ")
+        # for usuario in resultado:
+        #     print(usuario)
+            
+    
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+        
+        
+def guardarMensaje(destinoID,mensaje,asunto ):
+    try:
+    
+        
+        # sql="insert into mensajeria ("+'asunto'+",mensaje,correo_origen,correo_destino,fecha,hora,estado) values ('"+asunto+"','"+mensaje+"','"+emailOrigen+"','"+emailDestino+"','"+fecha+"','"+hora+"','send');"
+
+
+        fecha=datetime.now().strftime("%d-%m-%Y")
+        origenID=str(session['userName'])
+        # origenID=str(14)
+        print(fecha)
+        print(f' mensaje origen: {origenID}')
+        
+        sql="insert into mensajes (\"from\",\"to\",asunto,mensaje,fecha) values ('"+origenID+"','"+destinoID+"','"+asunto+"','"+mensaje+"','"+fecha+"');"
+        print(sql)
+        # sql="insert into mensajeria ("'asunto '",mensaje,correo_origen,correo_destino,estado) values ('"+asunto+"','"+mensaje+"',DATE('now'),TIME('now'),'"+emailOrigen+"','"+emailDestino+"','send')"
+        # print(sql)
+        # print(emailDestino)
+        # print(emailOrigen)
+        
+        ejecutarSentenciaSQL(sql)
+        
+    except Exception as e:
+        print("Error Guardar mensaje: " + str(e))  

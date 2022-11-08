@@ -2,10 +2,19 @@
 
 {% block body %}
 
-<form action="" method="POST">
+<form action="{{url_for('endMessage')}}" method="POST">
 
-    <input type="asunto " placeholder="asunto">
-    <input type="mensaje" placeholder="mensaje">
+    <input type="text" placeholder="asunto" required  name="asunto"> 
+    <input type="text" placeholder="mensaje" required name="mensaje" > 
+
+    <!-- select -->
+    <select name="destino" id="destino">
+        <option value="">Usuario a envíar mensaje</option>
+        {%for usuario in usuarios%}
+        <option value={{usuario[0]}}>{{usuario[0]}}</option>
+        
+        {%endfor%}
+    </select>
     
     <input type="submit" value="enviar">
 

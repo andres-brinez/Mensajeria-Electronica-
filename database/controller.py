@@ -120,6 +120,7 @@ def ListaDestinatarios(idUsuario):
       
     try:
         
+        print(idUsuario)
         #selecciona los destinatarios (usuarios) que no sean el usuario logueado
         sql= f"SELECT name FROM usuarios WHERE id != {idUsuario};"
         
@@ -163,3 +164,44 @@ def guardarMensaje(destinoID,mensaje,asunto ):
         
     except Exception as e:
         print("Error Guardar mensaje: " + str(e))  
+        
+
+def MensajesEnviados(origen):
+      
+    try:
+        
+        
+        #selecciona los destinatarios (usuarios) que no sean el usuario logueado
+        sql= "SELECT \"mensajeID\", \"to\",asunto,fecha FROM mensajes  WHERE \"from\"  = '"+origen+"' ORDER BY fecha DESC ;"
+
+        # sql= "SELECT "+'asunto'+", mensaje,fecha,hora,correo_destino FROM mensajeria  WHERE correo_origen = '"+emailOrigen+"' ORDER BY fecha DESC ;"
+        print(sql)
+        
+        resultado=ejecutarSentenciaSQL(sql)
+        print(resultado)
+                
+        
+        # para indicar si existe  o no existe
+        # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
+        if (len(resultado)>0):
+            return resultado # existen mensajes
+        else :
+            return 'no mensajes' # no hay mensajez
+    
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+        
+def MensajesRecibidos(origen):
+      
+        sql= "SELECT \"mensajeID\", \"from\",asunto,fecha FROM mensajes  WHERE \"to\"  = '"+origen+"' ORDER BY fecha DESC ;"
+
+        resultado= ejecutarSentenciaSQL(sql)
+        
+        
+        # para indicar si existe  o no existe
+        # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
+        if (len(resultado)>0):
+            return resultado # existe 
+        else :
+            return 'no mensajes' # no existe
+        

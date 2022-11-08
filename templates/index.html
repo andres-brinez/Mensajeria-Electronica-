@@ -24,6 +24,41 @@
         </button>
     </nav>
 
+    <!-- MENSAJES ENVIADOS -->
+    {<% if messagesEnd != 'no mensajes' %}
+
+        {% for message in messagesEnd %}
+            <!-- TABLA mensajes enviados -->
+            <caption>Mensajes Enviados</caption>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>    
+                        <th>Destinatarios</th>
+                        <th>Asunto</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+            <tr>
+                <td><input type="checkbox" name="message" value="{{message[0]}}"></td>
+                <td>{{message[1]}}</td>
+                <td>{{message[2]}}</td>
+                <td>{{message[3]}}</td>
+            </tr>
+                </tbody>
+            </table>
+        {% endfor %}
+
+    {% else %}
+        <p>No hay mensajes enviados</p>
+    {% endif %}>
+            
+            
+        
+
+    
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script >
 

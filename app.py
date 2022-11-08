@@ -37,11 +37,12 @@ def login ():
             global idRegistrado
             idRegistrado=session['id'] # para poder usar la variable global
         
-            """ flash hace posible grabar un mensaje al final de una solicitud y
-            acceder a él en la siguiente solicitud. """
-            flash("Bienvenido "+usuario) #  mensaje de bienvenida
+            
             return redirect(url_for('inicio')) # redireccionar a la ruta 
         
+        
+        """ flash hace posible grabar un mensaje al final de una solicitud y
+            acceder a él en la siguiente solicitud. """
         flash("Usuario o contraseña incorrecta ")
         return redirect(url_for('login')) # redireccionar a la ruta 
 
@@ -84,24 +85,34 @@ def register():
     # return render_template('register.html',form=form)
     return 'aquí va la recuperación de contraseñas'
 
+
+
 # inicio
 @app.route('/inicio',methods=['GET','POST'])
 def inicio():
     
     if 'id' in session:
-        return render_template('index.html')
+        userName=session['userName']
+        print(userName)
+        print(session['id'])
+
+        Enviados=DB.MensajesEnviados(userName)
+        return render_template('index.html',messagesEnd=Enviados)
     else:
         return 'inicia sesión para poder acceder a está página  '
 
+
 @app.route('/endMessage',methods=['GET','POST'])
 def endMessage():
+    
     print(f'id registrado {idRegistrado}')
     
     # if 'id' in session:
     
-        # idUsuario= session['id']
+    idUsuario= session['id']
+        # print(f'id usuario {idUsuario}')
         
-    listado=DB.ListaDestinatarios(14)
+    listado=DB.ListaDestinatarios(idUsuario)
     
     # si se envía el formulario por el metodo post 
     if  request.method=='POST':

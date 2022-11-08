@@ -122,10 +122,9 @@ def ListaDestinatarios(idUsuario):
         
         print(idUsuario)
         #selecciona los destinatarios (usuarios) que no sean el usuario logueado
-        sql= f"SELECT name FROM usuarios WHERE id != {idUsuario};"
+        sql= f"SELECT id,name FROM usuarios WHERE id != {idUsuario};"
         
         resultado= ejecutarSentenciaSQL(sql)
-        
         print(resultado)
         
         return resultado
@@ -170,9 +169,8 @@ def MensajesEnviados(origen):
       
     try:
         
-        
+        sql= "SELECT \"mensajeID\", u.\"name\",asunto,fecha FROM mensajes m  JOIN usuarios u ON m.\"to\"  = u.id WHERE \"from\" = '"+origen+"' ORDER BY fecha DESC ;"
         #selecciona los destinatarios (usuarios) que no sean el usuario logueado
-        sql= "SELECT \"mensajeID\", \"to\",asunto,fecha FROM mensajes  WHERE \"from\"  = '"+origen+"' ORDER BY fecha DESC ;"
 
         # sql= "SELECT "+'asunto'+", mensaje,fecha,hora,correo_destino FROM mensajeria  WHERE correo_origen = '"+emailOrigen+"' ORDER BY fecha DESC ;"
         print(sql)
@@ -192,11 +190,13 @@ def MensajesEnviados(origen):
         print("Error al traer los datos: " + str(e))
         
 def MensajesRecibidos(origen):
-      
-        sql= "SELECT \"mensajeID\", \"from\",asunto,fecha FROM mensajes  WHERE \"to\"  = '"+origen+"' ORDER BY fecha DESC ;"
-
+    
+    try:
+        """ UTILICÉ EL JOIN ON PARA UNIR LA TABLA DE USAURIOS Y MENSAJES Y ASI PODER CAMBIAR EL ID DEL USUARIO QUE RECIBE POR SU NOMBRRE PARA PODERLO MOSTRAR EN EL FRONT """
+        sql= "SELECT \"mensajeID\",\"from\",asunto,fecha,u.\"name\" FROM mensajes m  JOIN usuarios u ON m.\"to\"  = u.id WHERE \"name\" = '"+origen+"' ORDER BY fecha DESC ;"
+        print(sql)
         resultado= ejecutarSentenciaSQL(sql)
-        
+        print(resultado)
         
         # para indicar si existe  o no existe
         # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
@@ -204,4 +204,6 @@ def MensajesRecibidos(origen):
             return resultado # existe 
         else :
             return 'no mensajes' # no existe
-        
+    
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))

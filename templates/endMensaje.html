@@ -11,7 +11,7 @@
     <select name="destino" id="destino">
         <option value="">Usuario a envíar mensaje</option>
         {%for usuario in usuarios%}
-        <option value={{usuario[0]}}>{{usuario[0]}}</option>
+        <option value={{usuario[0]}}>{{usuario[1]}}</option>
         
         {%endfor%}
     </select>

@@ -25,35 +25,68 @@
     </nav>
 
     <!-- MENSAJES ENVIADOS -->
-    {<% if messagesEnd != 'no mensajes' %}
-
+    {% if messagesEnd != 'no mensajes' %}
+        <caption>Mensajes Enviados</caption>
+         <!-- TABLA mensajes enviados -->
+         <table>
+            <thead>
+                <tr>
+                    <th></th>    
+                    <th>Destinatarios</th>
+                    <th>Asunto</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
         {% for message in messagesEnd %}
-            <!-- TABLA mensajes enviados -->
-            <caption>Mensajes Enviados</caption>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>    
-                        <th>Destinatarios</th>
-                        <th>Asunto</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
+           
             <tr>
                 <td><input type="checkbox" name="message" value="{{message[0]}}"></td>
                 <td>{{message[1]}}</td>
                 <td>{{message[2]}}</td>
                 <td>{{message[3]}}</td>
             </tr>
-                </tbody>
-            </table>
+               
         {% endfor %}
+            </tbody>
+        </table>
 
     {% else %}
         <p>No hay mensajes enviados</p>
-    {% endif %}>
+    {% endif %}
             
+
+    <!-- MENSAJES Recibidos -->
+    {% if messagesRecibidos != 'no mensajes' %}
+    <caption>Mensajes Recibidos</caption>
+    <!-- TABLA  -->
+    <table>
+        <thead>
+            <tr>
+                <th></th>    
+                <th>Remitente</th>
+                <th>Asunto</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for message in messagesRecibidos %}
+        
+        <tr>
+            <td><input type="checkbox" name="message" value="{{message[0]}}"></td>
+            <td>{{message[1]}}</td> 
+            <td>{{message[2]}}</td>
+            <td>{{message[3]}}</td>
+        </tr>
+            
+    {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <p>No hay mensajes recibidos</p>
+{% endif %}
+   
             
         
 

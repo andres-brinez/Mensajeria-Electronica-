@@ -97,9 +97,11 @@ def inicio():
         print(session['id'])
 
         Enviados=DB.MensajesEnviados(userName)
-        return render_template('index.html',messagesEnd=Enviados)
+        Recibidos=DB.MensajesRecibidos(userName)
+        
+        return render_template('index.html',messagesEnd=Enviados,messagesRecibidos=Recibidos)
     else:
-        return 'inicia sesión para poder acceder a está página  '
+        return 'inicia sesión para poder acceder a está página    '
 
 
 @app.route('/endMessage',methods=['GET','POST'])
@@ -107,12 +109,14 @@ def endMessage():
     
     print(f'id registrado {idRegistrado}')
     
-    # if 'id' in session:
+    if 'id' in session:
     
-    idUsuario= session['id']
-        # print(f'id usuario {idUsuario}')
-        
-    listado=DB.ListaDestinatarios(idUsuario)
+        idUsuario= session['id']
+        print(f'id usuario {idUsuario}')
+        listado=DB.ListaDestinatarios(idUsuario)
+        print(listado)
+    else:
+        return 'inicia sesión para poder acceder a está página    '
     
     # si se envía el formulario por el metodo post 
     if  request.method=='POST':
@@ -129,7 +133,6 @@ def endMessage():
         
         
         return 'mensaje envíado'    
-            
             
     return render_template('endMensaje.html',usuarios=listado)
 

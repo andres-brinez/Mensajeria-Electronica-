@@ -27,6 +27,8 @@
     <!-- MENSAJES ENVIADOS -->
     {% if messagesEnd != 'no mensajes' %}
         <caption>Mensajes Enviados</caption>
+        <a href="{{url_for('edit')}}">editar</a>
+        <a href="{{url_for('delete')}}">eliminar</a>
          <!-- TABLA mensajes enviados -->
          <table>
             <thead>
@@ -41,7 +43,8 @@
         {% for message in messagesEnd %}
            
             <tr>
-                <td><input type="checkbox" name="message" value="{{message[0]}}"></td>
+            
+                <td><input type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
                 <td>{{message[1]}}</td>
                 <td>{{message[2]}}</td>
                 <td>{{message[3]}}</td>
@@ -73,7 +76,7 @@
     {% for message in messagesRecibidos %}
         
         <tr>
-            <td><input type="checkbox" name="message" value="{{message[0]}}"></td>
+            <td><input type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
             <td>{{message[1]}}</td> 
             <td>{{message[2]}}</td>
             <td>{{message[3]}}</td>
@@ -92,8 +95,9 @@
 
     
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script >
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- mensaje cerrar sesión -->
+<script >
 
     const  button = document.getElementById('logout')
     button.addEventListener('click', () => {
@@ -112,7 +116,7 @@
                 }
         })
     })
-  </script>
+</script>
 
 {% endblock %}
 

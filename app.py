@@ -80,13 +80,6 @@ def register():
         return render_template('register.html',form=form)
 
 
-
-    form=FormRegister() # instanciar el formulario
-    # return render_template('register.html',form=form)
-    return 'aquí va la recuperación de contraseñas'
-
-
-
 # inicio
 @app.route('/inicio',methods=['GET','POST'])
 def inicio():
@@ -101,7 +94,7 @@ def inicio():
         
         return render_template('index.html',messagesEnd=Enviados,messagesRecibidos=Recibidos)
     else:
-        return 'inicia sesión para poder acceder a está página    '
+        return render_template('accesoDenegado.html')
 
 
 @app.route('/endMessage',methods=['GET','POST'])
@@ -136,8 +129,44 @@ def endMessage():
             
     return render_template('endMensaje.html',usuarios=listado)
 
-    # else:
-    #     return ' no hay id registrado '
+@app.route('/edit',methods=['GET','POST'])
+def edit():
+    
+    print(f'id registrado {idRegistrado}')
+    
+    if 'id' in session:
+    
+        idUsuario= session['id']
+        print(f'id usuario {idUsuario}')
+        listado=DB.ListaDestinatarios(idUsuario)
+        print(listado)
+    else:
+        return 'inicia sesión para poder acceder a está página    '
+    
+    # si se envía el formulario por el metodo post 
+    if  request.method=='POST':
+        print('formulario enviado')
+        idDestinatario = request.form["destino"] 
+        mensaje = request.form["mensaje"] 
+        asunto=request.form["asunto"]
+        
+        print(idDestinatario)
+        print(mensaje)
+        print(asunto)
+        
+        DB.guardarMensaje(idDestinatario,mensaje,asunto)
+        
+        """ render_template('endMensaje.html',usuarios=listado) """
+        return 'mensaje envíado'    
+            
+    return  'editar mensaje'
+
+@app.route('/delete',methods=['GET','POST'])
+def delete():
+    return 'delete mensaje'
+
+    
+    
     
     
 

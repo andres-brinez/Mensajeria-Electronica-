@@ -44,7 +44,7 @@
            
             <tr>
             
-                <td><input type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
+                <td><input class="checkbox" type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
                 <td>{{message[1]}}</td>
                 <td>{{message[2]}}</td>
                 <td>{{message[3]}}</td>
@@ -76,7 +76,7 @@
     {% for message in messagesRecibidos %}
         
         <tr>
-            <td><input type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
+            <td><input  class="checkbox" type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
             <td>{{message[1]}}</td> 
             <td>{{message[2]}}</td>
             <td>{{message[3]}}</td>
@@ -95,6 +95,8 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- mensaje cerrar sesión -->
 <script  src="/static/js/logout.js"></script>
+<!-- seleccionar solo un checkbox -->
+<script src="/static/js/checkBox.js"></script>
 
 {% endblock %}
 

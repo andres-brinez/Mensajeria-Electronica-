@@ -91,32 +91,10 @@
 {% endif %}
    
             
-        
-
     
-
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- mensaje cerrar sesión -->
-<script >
-
-    const  button = document.getElementById('logout')
-    button.addEventListener('click', () => {
-        Swal.fire({
-            title: '¿Está seguro?',
-            text: "¿Desea cerrar sesión?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, cerrar sesión'
-            })
-            .then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/login'
-                }
-        })
-    })
-</script>
+<script  src="/static/js/logout.js"></script>
 
 {% endblock %}
 

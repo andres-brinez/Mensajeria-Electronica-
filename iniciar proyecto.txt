@@ -1,2 +1,0 @@
- flask --app app --debug run
- venv\Scripts\activate - activar entorno virtual

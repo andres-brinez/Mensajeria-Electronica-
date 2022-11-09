@@ -190,7 +190,6 @@ def MensajesEnviados(origen):
         print("Error al traer los datos: " + str(e))
         
 def MensajesRecibidos(origen):
-    
     try:
         """ UTILICÉ EL JOIN ON PARA UNIR LA TABLA DE USAURIOS Y MENSAJES Y ASI PODER CAMBIAR EL ID DEL USUARIO QUE RECIBE POR SU NOMBRRE PARA PODERLO MOSTRAR EN EL FRONT """
         sql= "SELECT \"mensajeID\",\"from\",asunto,fecha,u.\"name\" FROM mensajes m  JOIN usuarios u ON m.\"to\"  = u.id WHERE \"name\" = '"+origen+"' ORDER BY fecha DESC ;"
@@ -207,3 +206,19 @@ def MensajesRecibidos(origen):
     
     except Exception as e:
         print("Error al traer los datos: " + str(e))
+        
+def DeleteMensaje(id):
+    try:
+        sql= "DELETE FROM mensajes WHERE \"mensajeID\" = "+id+";"
+        print(sql)
+        resultado= ejecutarSentenciaSQL(sql)
+        print(resultado)
+        
+        return True
+    
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+        return False
+        
+
+    

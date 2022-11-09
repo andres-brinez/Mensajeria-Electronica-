@@ -109,7 +109,7 @@ def endMessage():
         listado=DB.ListaDestinatarios(idUsuario)
         print(listado)
     else:
-        return 'inicia sesión para poder acceder a está página    '
+        return render_template('accesoDenegado.html')
     
     # si se envía el formulario por el metodo post 
     if  request.method=='POST':
@@ -141,7 +141,7 @@ def edit():
         listado=DB.ListaDestinatarios(idUsuario)
         print(listado)
     else:
-        return 'inicia sesión para poder acceder a está página    '
+        return render_template('accesoDenegado.html')
     
     # si se envía el formulario por el metodo post 
     if  request.method=='POST':
@@ -161,10 +161,13 @@ def edit():
             
     return  'editar mensaje'
 
-@app.route('/delete',methods=['GET','POST'])
-def delete():
-    return 'delete mensaje'
-
+@app.route('/delete/<string:id>',methods=['GET','POST'])
+def delete(id=None):
+    
+    if DB.DeleteMensaje(id):
+        return redirect(url_for('inicio', delete='true'))
+    else:
+        return redirect(url_for('inicio', delete='false'))
     
     
     

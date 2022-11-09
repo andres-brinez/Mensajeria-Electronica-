@@ -28,7 +28,7 @@
     {% if messagesEnd != 'no mensajes' %}
         <caption>Mensajes Enviados</caption>
         <a class="btnEditar" href="{{url_for('edit')}}">editar</a>
-        <a class="btnEliminar" href="{{url_for('delete')}}">eliminar</a>
+        <a class="btnEliminar" href="">eliminar</a>
         
         <!-- TABLA mensajes enviados -->
          <table>
@@ -92,7 +92,7 @@
     <p>No hay mensajes recibidos</p>
 {% endif %}
    
-            
+
     
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- mensaje cerrar sesión -->
@@ -100,7 +100,9 @@
 <!-- seleccionar solo un checkbox -->
 <script src="/static/js/checkBox.js"></script>
 <!-- eliminar-editar -->
-<script src="/"></script>
+<script src="/static/js/EditarEliminar.js"></script>
+<!-- Mensajes de edición e eliminación - confirmación -->
+<script src="/static/js/Mensajes.js"></script>
 
 {% endblock %}
 

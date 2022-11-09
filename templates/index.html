@@ -27,9 +27,10 @@
     <!-- MENSAJES ENVIADOS -->
     {% if messagesEnd != 'no mensajes' %}
         <caption>Mensajes Enviados</caption>
-        <a href="{{url_for('edit')}}">editar</a>
-        <a href="{{url_for('delete')}}">eliminar</a>
-         <!-- TABLA mensajes enviados -->
+        <a class="btnEditar" href="{{url_for('edit')}}">editar</a>
+        <a class="btnEliminar" href="{{url_for('delete')}}">eliminar</a>
+        
+        <!-- TABLA mensajes enviados -->
          <table>
             <thead>
                 <tr>
@@ -40,6 +41,7 @@
                 </tr>
             </thead>
             <tbody>
+
         {% for message in messagesEnd %}
            
             <tr>
@@ -76,7 +78,7 @@
     {% for message in messagesRecibidos %}
         
         <tr>
-            <td><input  class="checkbox" type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
+            <td><input id="id-recibido"  type="hidden" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
             <td>{{message[1]}}</td> 
             <td>{{message[2]}}</td>
             <td>{{message[3]}}</td>
@@ -97,6 +99,8 @@
 <script  src="/static/js/logout.js"></script>
 <!-- seleccionar solo un checkbox -->
 <script src="/static/js/checkBox.js"></script>
+<!-- eliminar-editar -->
+<script src="/"></script>
 
 {% endblock %}
 

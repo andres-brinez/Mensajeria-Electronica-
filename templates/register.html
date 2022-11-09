@@ -1,0 +1,46 @@
+<!-- extender de  la plantilla base -->
+{%extends 'base.html'%} 
+{% block style %}<link rel="stylesheet" href="/static/css/form.css" />{% endblock %}> 
+
+{% block title%} Registrarce {% endblock %}
+
+{% block body %}
+  <!-- action es  lo que se ejecuta o dirige cuando se envia el formulario , la accion-->
+  <form action="{{url_for('register')}}"  method="POST">
+    <h1>Registrarce</h1>
+    <p>Ingrese sus datos para poder Crear una nueva cuenta </p>
+    <!-- solo poder ver  un input -->
+
+    {{ form.name(placeholder="Nombre", )}}
+    {{ form.email(placeholder="Email" )}}
+    {{ form.password(size=30,placeholder='Contraseña') }}
+    {{form.submit}}
+  
+    <a href="/login">Ingresar</a>
+    <a href="Activate">Activar cuenta</a>
+  </form>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script >
+    // url 
+    const url = window.location.href;
+    // si la url contiene el parametro 
+    if (url.indexOf('register=ok') > -1) {
+        // mostrar mensaje
+        Swal.fire(
+        'Usuario Registrado',
+        'Al correo registrado fue envíado un código para activar la cuenta',
+        'success'
+      );
+    }
+    else if (url.indexOf('register=false') > -1) {
+      // mostrar mensaje
+      Swal.fire(
+      'Error el registrar el usuario',
+      'Error con la base de  datos ',
+      ':( :(',
+      'error'
+      );
+    }
+  </script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{%extends 'base.html'%} 
+<title>{% block title %}Envíar mensaje {% endblock %}</title>
+
+
+{% block body %}
+
+<form action="{{url_for('sendMessage')}}" method="POST">
+
+    <input type="text" placeholder="asunto" required  name="asunto"> 
+    <input type="text" placeholder="mensaje" required name="mensaje" > 
+
+    <!-- select -->
+    <select name="destino" id="destino">
+        <option value="">Usuario a envíar mensaje</option>
+        {%for usuario in usuarios%}
+        <option value={{usuario[0]}}>{{usuario[1]}}</option>
+        
+        {%endfor%}
+    </select>
+    
+    <input type="submit" value="enviar">
+
+    
+
+</form>
+
+{% endblock %}

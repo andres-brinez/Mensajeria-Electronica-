@@ -5,8 +5,6 @@ from forms.forms  import * #  importar la carpeta de  los formularios con los fo
 import controller as  DB
 from utils import ordenarLista
 
-# from utils import EnvioEmail
-
 
 # el session es creado al validar el usuario en el controller
 
@@ -28,9 +26,7 @@ def register():
         
     # si se envía el formulario por el metodo post 
     if  request.method=='POST':
-        
-        print('envio formulario')
-        
+                
         # trae los datos del formulario
         #asigna el valor  valor enviado desde formulario a la variable
         nombre=request.form["name"]   
@@ -38,7 +34,7 @@ def register():
         password=request.form["password"]
         
         registro= DB.registrarUsuarioDB(nombre,password,email) #devuelve true o false si pudo registrar usuario 
-        print(registro)
+
         if registro:
             return redirect(url_for('register',register='ok')) 
         
@@ -50,7 +46,6 @@ def register():
         form=FormRegister() # instanciar el formulario
         return render_template('register.html',form=form)
     
-
 
 # login
 @app.route('/login',methods=['GET','POST'])

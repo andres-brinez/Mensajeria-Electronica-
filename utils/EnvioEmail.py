@@ -18,3 +18,7 @@ def enviar(email_destino,mensaje,asunto):
     smtp.login(email_origen, password)
     smtp.sendmail(email_origen, email_destino, email.as_string())
     smtp.quit()
+    
+    
+
+""" El  envío del email se hace desde en crontroller en la parte de registrar usuario  """

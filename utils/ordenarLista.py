@@ -2,8 +2,7 @@
 
 def ordenar(destinatarios,ID):
     # recorrer lsta
-    print(destinatarios)
-    print(ID)
+    
     iterador=0
     lista=[]
     numero_destinatarios=len(destinatarios)

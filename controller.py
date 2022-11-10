@@ -189,9 +189,19 @@ def guardarMensaje(destinoID,mensaje,asunto ):
         sql="insert into mensajes (\"from\",\"to\",asunto,mensaje,fecha) values ('"+origenID+"','"+destinoID+"','"+asunto+"','"+mensaje+"','"+fecha+"');"
         print(sql)
         
-        ejecutarSentenciaSQL(sql)
+        print('guardando mensaje')
+        
+        resultado=ejecutarSentenciaSQL(sql)
+        
+        print('resultado',resultado)
+        
+        if resultado==False:
+            return  False
+        
+        return True
         
     except Exception as e:
-        print("Error Guardar mensaje: " + str(e))  
+        print("Error Guardar mensaje: " + str(e)) 
+        return False 
 
         

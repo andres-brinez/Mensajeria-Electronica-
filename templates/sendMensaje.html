@@ -6,8 +6,9 @@
 
 <form action="{{url_for('sendMessage')}}" method="POST">
 
-    <input type="text" placeholder="asunto" required  name="asunto"> 
-    <input type="text" placeholder="mensaje" required name="mensaje" > 
+    {{ form.csrf_token }} <!-- esto es un token para evitar ataques -->
+    {{ form.asunto(placeholder="asunto" )}}
+    {{ form.mensaje(size=30,placeholder='mensaje') }}
 
     <!-- select -->
     <select name="destino" id="destino">
@@ -18,7 +19,7 @@
         {%endfor%}
     </select>
     
-    <input type="submit" value="enviar">
+    {{form.submit}}
 
     
 

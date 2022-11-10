@@ -95,33 +95,43 @@ def inicio():
     
 @app.route('/sendMessage',methods=['GET','POST'])
 def sendMessage():
-        
+    # para saber si está logeado
     if 'id' in session:
+        
+        form=FormMensaje()
+
+        if(form.validate_on_submit()):
+            print("formulario enviado correctamente")
+            
+            idDestinatario = request.form["destino"] 
+            mensaje = request.form["mensaje"] 
+            asunto=request.form["asunto"]
+            
+            respuesta= DB.guardarMensaje(idDestinatario,mensaje,asunto)
+            
+            if respuesta==False:
+                return redirect(url_for('inicio',mensaje='false'))
+
+        
+            else :
+                return redirect(url_for('inicio',mensaje='ok')) 
+            
+            
+        else:    
+            idUsuario= session['id']
+            print(f'id usuario {idUsuario}')
+            listado=DB.ListaDestinatarios(idUsuario)
+            print(listado)
+            
+            return render_template('sendMensaje.html',usuarios=listado,form=form)
     
-        idUsuario= session['id']
-        print(f'id usuario {idUsuario}')
-        listado=DB.ListaDestinatarios(idUsuario)
-        print(listado)
+    
+        
     else:
         return render_template('accesoDenegado.html')
     
-    # si se envía el formulario por el metodo post 
-    if  request.method=='POST':
-        print('formulario enviado')
-        idDestinatario = request.form["destino"] 
-        mensaje = request.form["mensaje"] 
-        asunto=request.form["asunto"]
-        
-        print(idDestinatario)
-        print(mensaje)
-        print(asunto)
-        
-        DB.guardarMensaje(idDestinatario,mensaje,asunto)
-        
-        
-        return 'mensaje envíado'    
+   
             
-    return render_template('sendMensaje.html',usuarios=listado)
 
 
 @app.route('/delete/<string:id>',methods=['GET','POST'])
@@ -134,17 +144,19 @@ def delete(id=None):
     
     
     
-@app.route('/edit',methods=['GET','POST'])
-def edit():
+@app.route('/edit/<string:id>',methods=['GET','POST'])
+def edit(id=None):
     
-    print(f'id registrado {session[id]}')
     
     if 'id' in session:
+        
+        print(id)
     
         idUsuario= session['id']
         print(f'id usuario {idUsuario}')
         listado=DB.ListaDestinatarios(idUsuario)
         print(listado)
+        return f'el id del mensaje seleccionado es {id}'
     else:
         return render_template('accesoDenegado.html')
     
@@ -164,4 +176,4 @@ def edit():
         """ render_template('endMensaje.html',usuarios=listado) """
         return 'mensaje envíado'    
             
-    return  'editar mensaje'
+    

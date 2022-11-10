@@ -94,7 +94,7 @@ def validarUsuarioDB(usuario,contrasena):
             # se  puede guardar lo que quiera del usuario logeado
             session['id']=resultado[0][0]
             session['userName']=resultado[0][1]
-            
+            session['email']=resultado[0][3]
             print(session)
             return True # existe 
         

@@ -16,9 +16,7 @@
     <h1>center mail</h1>
     <nav>
 
-        <a href="{{url_for('sendMessage')}}">Envíar mensaje</a>
-        <a href="">Eliminar</a>
-        <a href="{{url_for('edit')}}">Editar</a>
+        <a href="{{url_for('sendMessage')}}">Envíar mensaje</a>        
         <a href="">Bandeja de entrada</a>
 
         <button id="logout">
@@ -29,9 +27,9 @@
     <!-- MENSAJES ENVIADOS -->
     {% if messagesEnd != 'no mensajes' %}
         <caption>Mensajes Enviados</caption>
-        <!-- <a class="btnEditar" href="{{url_for('edit')}}">editar</a> -->
         <a class="btnEliminar" href="">eliminar</a>
-        
+        <a class="btnEditar" href="">Editar</a>
+
         <!-- TABLA mensajes enviados -->
          <table>
             <thead>

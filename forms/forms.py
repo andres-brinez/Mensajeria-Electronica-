@@ -24,6 +24,12 @@ class FormRegister(FlaskForm):
     submit=SubmitField('Registrarce')
     
 
+class FormMensaje(FlaskForm):
+    asunto = StringField('asunto', validators=[DataRequired(message='Este campo es requerido')])
+    mensaje = StringField('mensaje', validators=[DataRequired(message='Este campo es requerido')])
+    submit=SubmitField('Envíar')
+
+
 
     
     

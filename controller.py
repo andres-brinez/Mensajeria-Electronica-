@@ -168,11 +168,9 @@ def ListaDestinatarios(idUsuario):
         sql= f"SELECT id,name FROM usuarios WHERE id != {idUsuario};"
         
         resultado= ejecutarSentenciaSQL(sql)
-        print(resultado)
+        print(f'destinatarios {resultado}')
         
         return resultado
-    
-        
     
     except Exception as e:
         print("Error al traer los datos: " + str(e))
@@ -204,4 +202,44 @@ def guardarMensaje(destinoID,mensaje,asunto ):
         print("Error Guardar mensaje: " + str(e)) 
         return False 
 
+def verMensaje(idMensaje):  
+    try:
         
+    
+        # sentencia sql para validar el usuario
+        sql= "SELECT * FROM mensajes WHERE mensajeID= "+idMensaje+";"
+        print(sql)
+        # ejecutar sentencia y obtenes resultado
+        resultado= ejecutarSentenciaSQL(sql)
+        print(resultado)
+        
+        # para indicar si existe  o no existe
+        # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
+        if (len(resultado)>0):
+            
+            return resultado # existe 
+        
+        else :
+            return False # no existe
+    
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+        return False
+             
+def UpdateMensaje(idMensaje,asunto,mensaje,destinatario):
+    try:
+
+        sql= "UPDATE mensajes   SET asunto='"+asunto+"',mensaje='"+mensaje+"',\"to\"="+destinatario+"  WHERE \"mensajeID\" = "+idMensaje+";"
+        print(sql)
+        resultado= ejecutarSentenciaSQL(sql)
+        print(resultado)
+        
+        if resultado==False:
+            return False
+        else:
+            return True
+    
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+        return False
+               

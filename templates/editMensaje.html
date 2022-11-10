@@ -1,0 +1,36 @@
+{%extends 'base.html'%} 
+<title>{% block title %}Editar  mensaje {% endblock %}</title>
+
+
+{% block body %}
+
+<form action="" method="POST">
+
+    {{ form.csrf_token }} <!-- esto es un token para evitar ataques -->
+    {{ form.asunto.label}}
+    {{ form.asunto(value= mensaje[1])}}
+    
+    {{ form.mensaje.label}}
+    {{ form.mensaje(value= mensaje[2])}}
+
+    <!-- select -->
+    <p>Destinatario</p>
+    <select name="destino" id="destino">
+        {%for usuario in usuarios%}
+        <option value={{usuario[0]}}>{{usuario[1]}}</option>
+        
+        {%endfor%}
+    </select>
+    
+    <label for="id">ID mensaje</label>
+    <input readonly id="id" type="text" value="{{mensaje[0]}}">
+
+    <label for="id">Fecha envío</label>
+    <input readonly id="id" type="text" value="{{mensaje[3]}}">
+    {{form.submit}}
+
+    
+
+</form>
+
+{% endblock %}

@@ -33,7 +33,7 @@ function EditarEliminar(tipo){
         else if (tipo === "editar") {
 
             // redireciona a la página indicada con el atributo id
-            window.location.href = "/edit/" + idEmpresa;
+            window.location.href = "/edit/" + id;
         }
     }
 
@@ -59,6 +59,7 @@ buttonEliminar.addEventListener("click", function(e) {
 const buttonEditar = document.querySelector('.btnEditar');
 buttonEditar.addEventListener('click', function(e){
     e.preventDefault()
+    // alert('boton editar')
     EditarEliminar("editar")
     }
 );

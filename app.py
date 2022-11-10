@@ -3,6 +3,8 @@ from flask import Flask,render_template,redirect,url_for,flash,request,session
 import os # Importar el módulo os para poder acceder a las variables de entorno.
 from forms.forms  import * #  importar la carpeta de  los formularios con los formularios
 import controller as  DB
+from utils import ordenarLista
+
 # from utils import EnvioEmail
 
 
@@ -130,10 +132,6 @@ def sendMessage():
     else:
         return render_template('accesoDenegado.html')
     
-   
-            
-
-
 @app.route('/delete/<string:id>',methods=['GET','POST'])
 def delete(id=None):
     
@@ -147,33 +145,49 @@ def delete(id=None):
 @app.route('/edit/<string:id>',methods=['GET','POST'])
 def edit(id=None):
     
-    
+    # si está logeado
     if 'id' in session:
         
-        print(id)
+        form=FormMensaje()    
+        
+        # si se está pidiendo el formulario
+        if request.method=='GET':
+            idUsuario= session['id']
+            
+            respuesta=DB.ListaDestinatarios(idUsuario) #  trae los destinatarios como está en la base de datos
+            
+            mensaje=DB.verMensaje(id)[0] # trae el mensaje con el id
+            toID=mensaje[5]
+            
+            destinatarios=ordenarLista.ordenar(respuesta,toID) # los ordena para que aparezca de primero el del id envíaddo
+            
+            if mensaje != False:
+                return render_template('editMensaje.html',form=form,usuarios=destinatarios,mensaje=mensaje[0])
+            else:
+                return redirect(url_for('inicio', edit='false'))
+            
     
-        idUsuario= session['id']
-        print(f'id usuario {idUsuario}')
-        listado=DB.ListaDestinatarios(idUsuario)
-        print(listado)
-        return f'el id del mensaje seleccionado es {id}'
+            # si se envía el formulario por el metodo post 
+        elif  request.method=='POST':
+            print('formulario enviado')
+            
+            idDestinatario = request.form["destino"] 
+            mensaje = request.form["mensaje"] 
+            asunto=request.form["asunto"]
+            
+            print('destinatario',idDestinatario)
+            print('mensaje',mensaje)
+            print('asunto',asunto)
+
+            resultado=DB.UpdateMensaje(id,asunto,mensaje,idDestinatario)
+            
+            if resultado==True:
+                return redirect(url_for('inicio', edit='true'))
+            else:
+                return redirect(url_for('inicio', edit='false'))
+            
     else:
         return render_template('accesoDenegado.html')
     
-    # si se envía el formulario por el metodo post 
-    if  request.method=='POST':
-        print('formulario enviado')
-        idDestinatario = request.form["destino"] 
-        mensaje = request.form["mensaje"] 
-        asunto=request.form["asunto"]
-        
-        print(idDestinatario)
-        print(mensaje)
-        print(asunto)
-        
-        DB.guardarMensaje(idDestinatario,mensaje,asunto)
-        
-        """ render_template('endMensaje.html',usuarios=listado) """
-        return 'mensaje envíado'    
-            
+    
     

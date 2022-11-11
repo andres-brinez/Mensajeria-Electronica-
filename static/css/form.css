@@ -1,6 +1,5 @@
 
 body{
-    background: #E5E5E5;
     height: 100vh;
 }
 
@@ -12,13 +11,11 @@ form{
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
-    font-family: 'Lexend Deca';
     align-items: center;
     /* border: solid 1px red ; */
 }
 
 h1{
-font-family: 'Lexend Deca';
 font-size: 64px;
 color: #224957;
 margin-bottom: 30px;
@@ -41,7 +38,6 @@ input{
     margin-bottom: 20px;
     padding-left: 10px;
     font-size: 18px;
-    font-family: 'Lexend Deca';
     color: #E5E5E5;
     background-color: #224957;
 
@@ -62,7 +58,6 @@ input[type="submit"]{
     border-radius: 5px;
     margin-bottom: 20px;
     font-size: 18px;
-    font-family: 'Lexend Deca';
     color: #E5E5E5;
     background: #20DF7F;
     cursor: pointer;

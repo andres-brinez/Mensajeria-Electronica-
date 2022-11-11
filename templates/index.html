@@ -1,7 +1,9 @@
 
 <!-- extender de  la plantilla base -->
 {%extends 'base.html'%} 
-<!-- {% block style %}<link rel="stylesheet" href="/static/css/form.css" />{% endblock %}>  -->
+{% block style %}<link rel="stylesheet" href="/static/css/index.css" />{% endblock %}> 
+
+
 
 {% block title%} Inicio {% endblock %}
 
@@ -9,19 +11,33 @@
 
     <!-- mensaje session -->
 
-    {% if session['userName'] %}
-        <p>{{ session['userName'] }}</p>
-    {% endif %}
-
-    <h1>center mail</h1>
     <nav>
 
-        <a href="{{url_for('sendMessage')}}">Envíar mensaje</a>        
-        <a href="">Bandeja de entrada</a>
+        <h1>center mail</h1>
 
-        <button id="logout">
-            Cerrar sesión
-        </button>
+        
+
+        <a href="{{url_for('sendMessage')}}">Envíar mensaje</a>        
+
+
+        <div id="navegador">
+            <ul>
+                <!--  onclick="ver(1)"  --> 
+              <li  id="seccion1"onmouseover="ver(1)" onmouseout="ocultar(1)">{{session['userName']}}</a><i class="fa-light fa-arrow-down-long"></i>
+                <div id="subseccion1">
+                    <div><p>va la descripcion</p></div>
+                    <p>{{session['email']}}</p>                
+                    <p><a  id="logout"> Cerrar sesión</a></p>
+                    <p><a href="#"> Subsección uno tres</a></p>
+                    <p><a href="#"> Subsección uno cuatro</a></p> 
+                </div>
+              </li>
+            </ul>
+          </div>
+
+
+
+        
     </nav>
 
     <!-- MENSAJES ENVIADOS -->
@@ -91,6 +107,9 @@
 {% else %}
     <p>No hay mensajes recibidos</p>
 {% endif %}
+
+
+
    
 
     
@@ -103,6 +122,16 @@
 <script src="/static/js/EditarEliminar.js"></script>
 <!-- Mensajes de edición e eliminación - confirmación -->
 <script src="/static/js/Mensajes.js"></script>
+<script>
+    
+        function ver(n) {
+                 document.getElementById("subseccion"+n).style.display="block"
+                 }
+        function ocultar(n) {
+                 document.getElementById("subseccion"+n).style.display="none"
+                 }
+        
+</script>
 
 {% endblock %}
 

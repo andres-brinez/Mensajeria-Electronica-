@@ -137,49 +137,51 @@ def delete(id=None):
     
     
     
-@app.route('/edit/<string:id>',methods=['GET','POST'])
-def edit(id=None):
+@app.route('/profile/<string:id>',methods=['GET','POST'])
+def profile(id=None):
     
     # si está logeado
     if 'id' in session:
         
-        form=FormMensaje()    
+        # form=FormMensaje()    
         
-        # si se está pidiendo el formulario
-        if request.method=='GET':
-            idUsuario= session['id']
+        # # si se está pidiendo el formulario
+        # if request.method=='GET':
+        #     idUsuario= session['id']
             
-            respuesta=DB.ListaDestinatarios(idUsuario) #  trae los destinatarios como está en la base de datos
+        #     respuesta=DB.ListaDestinatarios(idUsuario) #  trae los destinatarios como está en la base de datos
             
-            mensaje=DB.verMensaje(id)[0] # trae el mensaje con el id
-            toID=mensaje[5]
+        #     mensaje=DB.verMensaje(id)[0] # trae el mensaje con el id
+        #     toID=mensaje[5]
             
-            destinatarios=ordenarLista.ordenar(respuesta,toID) # los ordena para que aparezca de primero el del id envíaddo
+        #     destinatarios=ordenarLista.ordenar(respuesta,toID) # los ordena para que aparezca de primero el del id envíaddo
             
-            if mensaje != False:
-                return render_template('editMensaje.html',form=form,usuarios=destinatarios,mensaje=mensaje[0])
-            else:
-                return redirect(url_for('inicio', edit='false'))
+        #     if mensaje != False:
+        #         return render_template('editMensaje.html',form=form,usuarios=destinatarios,mensaje=mensaje[0])
+        #     else:
+        #         return redirect(url_for('inicio', edit='false'))
+        
+        return render_template('profile.html')
             
     
-            # si se envía el formulario por el metodo post 
-        elif  request.method=='POST':
-            print('formulario enviado')
+        #     # si se envía el formulario por el metodo post 
+        # elif  request.method=='POST':
+        #     print('formulario enviado')
             
-            idDestinatario = request.form["destino"] 
-            mensaje = request.form["mensaje"] 
-            asunto=request.form["asunto"]
+        #     idDestinatario = request.form["destino"] 
+        #     mensaje = request.form["mensaje"] 
+        #     asunto=request.form["asunto"]
             
-            print('destinatario',idDestinatario)
-            print('mensaje',mensaje)
-            print('asunto',asunto)
+        #     print('destinatario',idDestinatario)
+        #     print('mensaje',mensaje)
+        #     print('asunto',asunto)
 
-            resultado=DB.UpdateMensaje(id,asunto,mensaje,idDestinatario)
+        #     resultado=DB.UpdateMensaje(id,asunto,mensaje,idDestinatario)
             
-            if resultado==True:
-                return redirect(url_for('inicio', edit='true'))
-            else:
-                return redirect(url_for('inicio', edit='false'))
+        #     if resultado==True:
+        #         return redirect(url_for('inicio', edit='true'))
+        #     else:
+        #         return redirect(url_for('inicio', edit='false'))
             
     else:
         return render_template('accesoDenegado.html')

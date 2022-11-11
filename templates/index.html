@@ -25,11 +25,11 @@
                 <!--  onclick="ver(1)"  --> 
               <li  id="seccion1"onmouseover="ver(1)" onmouseout="ocultar(1)">{{session['userName']}}</a><i class="fa-light fa-arrow-down-long"></i>
                 <div id="subseccion1">
-                    <div><p>va la descripcion</p></div>
-                    <p>{{session['email']}}</p>                
-                    <p><a  id="logout"> Cerrar sesión</a></p>
-                    <p><a href="#"> Subsección uno tres</a></p>
-                    <p><a href="#"> Subsección uno cuatro</a></p> 
+                <div><p>va la descripcion</p></div>
+                <a href="{{url_for('profile',id=session['id'])}}">Perfil</a>              
+                <p><a  id="logout"> Cerrar sesión</a></p>
+                <p><a href="#"> Subsección uno tres</a></p>
+                <p><a href="#"> Subsección uno cuatro</a></p> 
                 </div>
               </li>
             </ul>

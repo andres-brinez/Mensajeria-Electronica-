@@ -55,12 +55,13 @@ def registrarUsuarioDB(usuario,contrasena,email,):
         password_codificada = hashlib.sha256(password_codificada).hexdigest() # encripta la contraseña
             
         # sentencia sql para registrar usuario
-        sql= "INSERT INTO usuarios (estado,name,password,correo,"+'"codigoActivacion"'+") VALUES ('false','"+usuario+"','"+ password_codificada+"','"+email+"','"+codigoActivacion+"');"
+        sql= "INSERT INTO usuarios (name,password,correo) VALUES ('"+usuario+"','"+ password_codificada+"','"+email+"');"
         print(sql)
-        
-        resultado=ejecutarSentenciaSQL(sql)
+        ejecutarSentenciaSQL(sql)
+        sql="INSERT INTO perfil (usuarioEmail)Values ('"+email+"');"# para el perfil
+        resultado= ejecutarSentenciaSQL(sql)
         print(resultado)
-        print(len(resultado))
+        
         if len(resultado)==0:
             return True
         

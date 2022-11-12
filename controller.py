@@ -95,7 +95,7 @@ def validarUsuarioDB(usuario,contrasena):
             # se  puede guardar lo que quiera del usuario logeado
             session['id']=resultado[0][0]
             session['userName']=resultado[0][1]
-            session['email']=resultado[0][3]
+            session['password']=resultado[0][2]
             print(session)
             return True # existe 
         
@@ -268,3 +268,41 @@ def verPerfil(correo):
     except Exception as e:
         print("Error al traer los datos: " + str(e))
         
+        
+def changePassword(passwordActual,passNew,passConfirm):
+    try:
+        # encriptar la contraseña para compararla con la de la base de datos
+        password_codificada=passwordActual.encode() # organiza la contrasña
+        # hay diferentes metodos en hashlib para encriptar la contraseña
+        password_codificada = hashlib.sha256(password_codificada).hexdigest() # encripta la contraseña
+        
+        print(password_codificada, session['password'])
+        
+        print()
+        if  session['password']== password_codificada:
+            
+            print(passNew,passConfirm)
+            if passNew==passConfirm:
+                
+                
+                # encriptar la contraseña para compararla con la de la base de datos
+                password_codificada=passNew.encode() # organiza la contrasña
+                # hay diferentes metodos en hashlib para encriptar la contraseña
+                password_codificada = hashlib.sha256(password_codificada).hexdigest() # encripta la contraseña
+            
+                sql= "UPDATE usuarios SET password='"+password_codificada+"' WHERE id = "+str(session['id'])+";"
+                print(sql)
+                
+                resultado=ejecutarSentenciaSQL(sql)
+                print('resultado', resultado)
+                
+                return 'contraseña  actualizada'     
+            
+            else:
+                return 'Las contraseñas no coinciden'    
+
+        else:
+            return 'Contraseña actual  incorrecta'
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+        return 'error al cambiar la contraseña'

@@ -244,3 +244,27 @@ def UpdateMensaje(idMensaje,asunto,mensaje,destinatario):
         print("Error al traer los datos: " + str(e))
         return False
                
+def verPerfil(correo):
+    try:
+        
+        sql= "SELECT * from perfil p JOIN usuarios u ON u.correo  = p.email WHERE u.id  = '"+correo+"';"
+        #selecciona los destinatarios (usuarios) que no sean el usuario logueado
+
+        print(sql)
+        
+        resultado=ejecutarSentenciaSQL(sql)
+        print(resultado)
+                
+        
+        # para indicar si existe  o no existe
+        # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
+        if (len(resultado)>0):
+            print(resultado)
+
+            return resultado
+        else :
+            return 'no existe ese perfil' 
+    
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+        

@@ -143,25 +143,16 @@ def profile(id=None):
     # si está logeado
     if 'id' in session:
         
-        # form=FormMensaje()    
+        formPassword=FormPassword()
+
+        if(formPassword.validate_on_submit()):
+            print("formulario enviado correctamente")
         
-        # # si se está pidiendo el formulario
-        # if request.method=='GET':
-        #     idUsuario= session['id']
-            
-        #     respuesta=DB.ListaDestinatarios(idUsuario) #  trae los destinatarios como está en la base de datos
-            
-        #     mensaje=DB.verMensaje(id)[0] # trae el mensaje con el id
-        #     toID=mensaje[5]
-            
-        #     destinatarios=ordenarLista.ordenar(respuesta,toID) # los ordena para que aparezca de primero el del id envíaddo
-            
-        #     if mensaje != False:
-        #         return render_template('editMensaje.html',form=form,usuarios=destinatarios,mensaje=mensaje[0])
-        #     else:
-        #         return redirect(url_for('inicio', edit='false'))
-        
-        return render_template('profile.html')
+        resultado=DB.verPerfil(id)
+        # return resultado
+        return render_template('profile.html', formPassword=formPassword)
+    
+    
             
     
         #     # si se envía el formulario por el metodo post 

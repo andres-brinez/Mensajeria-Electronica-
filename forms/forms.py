@@ -29,8 +29,15 @@ class FormMensaje(FlaskForm):
     mensaje = StringField('mensaje', validators=[DataRequired(message='Este campo es requerido')])
     submit=SubmitField('Envíar')
 
-
-
+class FormPassword(FlaskForm):
+    actual = StringField('passwordActual', validators=[DataRequired(message='Este campo es requerido')])
+    nueva = StringField('newPassword', validators=[DataRequired(message='Este campo es requerido')])
+    nueva = StringField('comPassword', validators=[DataRequired(message='Este campo es requerido')])
+    submit=SubmitField('Envíar')
     
-    
+class FormProfile(FlaskForm):
+    email = EmailField('email' )
+    about = StringField('about')
+    company = StringField('company')
+    submit=SubmitField('Envíar')
     

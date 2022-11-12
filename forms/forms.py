@@ -1,6 +1,6 @@
 from logging import PlaceHolder
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField,EmailField,SubmitField,ImageField
+from wtforms import StringField, PasswordField, BooleanField,EmailField,SubmitField
 from wtforms.validators import DataRequired
 
 class FormEjemplo(FlaskForm):
@@ -30,9 +30,9 @@ class FormMensaje(FlaskForm):
     submit=SubmitField('Envíar')
 
 class FormPassword(FlaskForm):
-    actual = StringField('passwordActual', validators=[DataRequired(message='Este campo es requerido')])
-    nueva = StringField('newPassword', validators=[DataRequired(message='Este campo es requerido')])
-    nueva = StringField('comPassword', validators=[DataRequired(message='Este campo es requerido')])
+    actual = StringField('Contraseña Actual', validators=[DataRequired(message='Este campo es requerido')])
+    nueva = StringField('New contraseña', validators=[DataRequired(message='Este campo es requerido')])
+    comfNueva = StringField('Confime la contraseña', validators=[DataRequired(message='Este campo es requerido')])
     submit=SubmitField('Envíar')
     
 class FormProfile(FlaskForm):
@@ -42,6 +42,6 @@ class FormProfile(FlaskForm):
     job = StringField('job')
     celular = StringField('celular')
     country = StringField('about')
-    img = ImageField('img')
+    imgUrl = StringField('imgUrl')
     submit=SubmitField('Envíar')
     

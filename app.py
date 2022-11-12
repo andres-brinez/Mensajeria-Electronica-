@@ -73,7 +73,7 @@ def login ():
 
 
 # inicio
-@app.route('/inicio',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def inicio():
     
     if 'id' in session:
@@ -134,9 +134,7 @@ def delete(id=None):
         return redirect(url_for('inicio', delete='true'))
     else:
         return redirect(url_for('inicio', delete='false'))
-    
-    
-    
+        
 @app.route('/profile/<string:id>',methods=['GET','POST'])
 def profile(id=None):
     
@@ -155,8 +153,16 @@ def profile(id=None):
         if(formPassword.validate_on_submit()):
             print("formulario enviado correctamente")
             
-            password = request.form["password"]
             
+            passwordActual = request.form["actual"]            
+            passwordNueva = request.form["nueva"]
+            passwordConfirmar=request.form["confNueva"]
+            
+            resultado= DB.changePassword(passwordActual,passwordNueva,passwordConfirmar)
+            
+            flash(resultado)
+            
+            return redirect(url_for('profile',id=id))
         
         resultado=DB.verPerfil(id)
         # return resultado
@@ -187,5 +193,5 @@ def profile(id=None):
     else:
         return render_template('accesoDenegado.html')
     
-    
-    
+
+

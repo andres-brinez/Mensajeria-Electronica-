@@ -144,13 +144,23 @@ def profile(id=None):
     if 'id' in session:
         
         formPassword=FormPassword()
+        formProfile=FormProfile()
+        
+        forms={
+            'formPassword':formPassword,
+            'formProfile':formProfile
+        }
+        
 
         if(formPassword.validate_on_submit()):
             print("formulario enviado correctamente")
+            
+            password = request.form["password"]
+            
         
         resultado=DB.verPerfil(id)
         # return resultado
-        return render_template('profile.html', formPassword=formPassword)
+        return render_template('profile.html', form=forms,profile=resultado)
     
     
             

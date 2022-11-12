@@ -30,9 +30,9 @@ class FormMensaje(FlaskForm):
     submit=SubmitField('Envíar')
 
 class FormPassword(FlaskForm):
-    actual = StringField('Contraseña Actual', validators=[DataRequired(message='Este campo es requerido')])
-    nueva = StringField('Nueva contraseña', validators=[DataRequired(message='Este campo es requerido')])
-    confNueva = StringField('Confime la contraseña', validators=[DataRequired(message='Este campo es requerido')])
+    actual= PasswordField('Contraseña Actual', validators=[DataRequired(message='Este campo es requerido')])
+    nueva= PasswordField('Nueva contraseña', validators=[DataRequired(message='Este campo es requerido')])
+    confNueva= PasswordField('Confime la contraseña', validators=[DataRequired(message='Este campo es requerido')])
     submit=SubmitField('Cambiar contraseña')
     
 class FormProfile(FlaskForm):

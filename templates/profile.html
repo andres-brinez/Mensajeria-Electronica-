@@ -7,6 +7,21 @@
   
 
   <h2>Perfil</h2>
+  
+  {% with messages = get_flashed_messages() %} <!-- obtiene los mensajes flash --> 
+    {% if messages %} <!-- si hay mensajes -->      
+      {% for message in messages %} <!-- Recorre los mensajes -->
+
+        {% if message == 'contraseña  actualizada' %} <!-- si el mensaje es de contraseña actualizada -->
+          <div id="success" role="alert">
+            {{message}}
+          </div>
+        {% else %} <!-- si el mensaje es de error -->
+          <p id="error">{{ message }}</p>
+        {% endif %}
+      {% endfor %}  
+    {% endif %}
+  {% endwith %}
 
   <!-- <div class="warpper"> -->
     <input class="radio" id="one" name="group" type="radio" checked>
@@ -29,7 +44,23 @@
         <p>You will learn many aspects of styling web pages! You’ll be able to set up the correct file structure, edit text and colors, and create attractive layouts. With these skills, you’ll be able to customize the appearance of your web pages to suit your every need!</p>
       </div>
       <div class="panel" id="three-panel">
-        <p>We recommend that you complete Learn HTML before learning CSS.</p>
+        
+        <!-- lo que se hace al envíar el formulario se programa en las rutas (app - /login) -->
+        <form action="" method="POST">
+          {{ form['formPassword'].csrf_token }} <!-- esto es un token para evitar ataques -->
+
+          {{ form['formPassword'].actual.label}}
+          {{ form['formPassword'].actual()}}
+
+          {{ form['formPassword'].nueva.label}}
+          {{ form['formPassword'].nueva()}}
+
+          {{ form['formPassword'].confNueva.label}}
+          {{ form['formPassword'].confNueva()}}
+
+          {{form['formPassword'].submit}}
+
+      
       </div>
     </div>
   <!-- </div> -->

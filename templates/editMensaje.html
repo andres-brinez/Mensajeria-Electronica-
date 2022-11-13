@@ -5,7 +5,7 @@
 {% block body %}
 
 <form action="" method="POST">
-
+    <p>mensje {{mensaje[1]}}</p>
     {{ form.csrf_token }} <!-- esto es un token para evitar ataques -->
     {{ form.asunto.label}}
     {{ form.asunto(value= mensaje[1])}}

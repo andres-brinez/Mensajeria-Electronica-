@@ -1,6 +1,6 @@
 from logging import PlaceHolder
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField,EmailField,SubmitField
+from wtforms import StringField, PasswordField, BooleanField,EmailField,SubmitField,FileField
 from wtforms.validators import DataRequired
 
 class FormEjemplo(FlaskForm):
@@ -42,6 +42,6 @@ class FormProfile(FlaskForm):
     job = StringField('job')
     celular = StringField('celular')
     country = StringField('about')
-    imgUrl = StringField('imgUrl')
+    img =FileField('img')
     submit=SubmitField('Envíar')
     

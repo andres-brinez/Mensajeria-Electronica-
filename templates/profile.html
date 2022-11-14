@@ -13,7 +13,7 @@
     {% if messages %} <!-- si hay mensajes -->      
       {% for message in messages %} <!-- Recorre los mensajes -->
 
-        {% if message == 'contraseña  actualizada' %} <!-- si el mensaje es de contraseña actualizada -->
+        {% if message == 'contraseña  actualizada' or message== 'perfil actualizado' %} <!-- si el mensaje es de contraseña actualizada -->
           <div id="success" role="alert">
             {{message}}
           </div>
@@ -38,28 +38,62 @@
     <div class="panels">
       <!-- ver pefil -->
       <div class="panel" id="one-panel">
-        {% for p in profile %}
 
           <h5>Sobre  mi </h5>
-          <p>{{p[2]}}</p>
+          <p>{{profile[2]}}</p>
 
           <h5>Detalles del perfil</h5>
-          <p>Nombre: {{p[9]}}</p> 
-          <p>Correo: {{p[1]}}</p>
-          <p>Telefono: {{p[5]}}</p>
-          <p>Compañia: {{p[3]}}</p>
-          <p>Cargo: {{p[4]}}</p>
-          <p>Pais: {{p[6]}}</p>
-          
-          
+          <p>Nombre: {{profile[9]}}</p> 
+          <p>Correo: {{profile[1]}}</p>
+          <p>Telefono: {{profile[5]}}</p>
+          <p>Compañia: {{profile[3]}}</p>
+          <p>Cargo: {{profile[4]}}</p>
+          <p>Pais: {{profile[6]}}</p>
+      
 
-               
-        {% endfor %}
+          
+                       
       </div>
       <!-- editar perfil -->
       <div class="panel" id="two-panel">
-        <div class="panel-title">Take-Away Skills</div>
-        <p>You will learn many aspects of styling web pages! You’ll be able to set up the correct file structure, edit text and colors, and create attractive layouts. With these skills, you’ll be able to customize the appearance of your web pages to suit your every need!</p>
+        <!-- lo que se hace al envíar el formulario se programa en las rutas (app - /login) -->
+        <form action="{{url_for('profile',id=profile[8])}}" method="POST" enctype="multipart/form-data">
+          {{ form['formProfile'].csrf_token }} <!-- esto es un token para evitar ataques -->
+
+          <label for="nombre">Nombre</label>
+          <input type="text " id="nombre" readonly value="{{profile[9]}}">
+          
+          <label for="email">Email</label>
+          <input type="email " id="email" name="email" readonly value="{{profile[1]}}">
+
+          {{ form['formProfile'].about.label}}
+          {{ form['formProfile'].about(value=profile[2])}}
+
+          {{ form['formProfile'].company.label}}
+          {{ form['formProfile'].company(value=profile[3])}}
+          
+          {{ form['formProfile'].job.label}}
+          {{ form['formProfile'].job(value=profile[4])}}
+
+          {{ form['formProfile'].celular.label}}
+          {{ form['formProfile'].celular(value=profile[5])}}
+
+          {{ form['formProfile'].country.label}}
+          {{ form['formProfile'].country(value=profile[6])}}
+
+          {{ form['formProfile'].img.label}}
+          {{ form['formProfile'].img(value=profile[3])}}
+
+          {{form['formProfile']. btnEnviar()}}
+
+        </form>
+
+        <div class="box">
+          <img src="/static/img/profile/{{profile[7]}}" alt="profile">
+          <p>{{profile[9]}}</p>
+          <p>{{profile[4]}}</p>
+        </div>
+
       </div>
       <!-- cambio de contraseña -->
       <div class="panel" id="three-panel">
@@ -68,6 +102,7 @@
         <form action="" method="POST">
           {{ form['formPassword'].csrf_token }} <!-- esto es un token para evitar ataques -->
 
+          <p>{{ form['formPassword'].csrf_token }}</p>
           {{ form['formPassword'].actual.label}}
           {{ form['formPassword'].actual()}}
 

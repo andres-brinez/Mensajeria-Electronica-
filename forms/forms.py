@@ -31,17 +31,16 @@ class FormMensaje(FlaskForm):
 
 class FormPassword(FlaskForm):
     actual= PasswordField('Contraseña Actual', validators=[DataRequired(message='Este campo es requerido')])
-    nueva= PasswordField('Nueva contraseña', validators=[DataRequired(message='Este campo es requerido')])
-    confNueva= PasswordField('Confime la contraseña', validators=[DataRequired(message='Este campo es requerido')])
+    nueva= PasswordField('Nueva contraseña')
+    confNueva= PasswordField('Confime la contraseña')
     submit=SubmitField('Cambiar contraseña')
     
 class FormProfile(FlaskForm):
-    email = EmailField('email' )
-    about = StringField('about')
-    company = StringField('company')
-    job = StringField('job')
+    about = StringField('Acerca de mi')
+    company = StringField('compañia')
+    job = StringField('Puesto')
     celular = StringField('celular')
-    country = StringField('about')
-    img =FileField('img')
-    submit=SubmitField('Envíar')
+    country = StringField('Pais')
+    img =FileField(u'img')
+    btnEnviar=SubmitField('Envíar')
     

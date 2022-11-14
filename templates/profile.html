@@ -3,6 +3,31 @@
 {% block style %}<link rel="stylesheet" href="/static/css/profile.css" />{% endblock %}> 
 {% block title%} Perfil{% endblock %}sty 
 
+{% block nav %}
+<nav>
+
+    <div class="logo">
+
+        <a href="{{url_for('inicio')}}">
+            <img src="https://cdn-icons-png.flaticon.com/512/7677/7677701.png" alt="logo">
+            <h1>center mail</h1>
+        </a>
+        
+            
+    </div>
+
+    <div id="navegador">
+        <ul>
+            <!--  onclick="ver(1)"  --> 
+          <li  style="cursor:auto;" id="seccion1">{{session['userName']}}</a><i class="fa-light fa-arrow-down-long"></i>
+          
+          </li>
+        </ul>
+    </div>
+    
+</nav>
+
+{% endblock %}
 {% block body %}
   
 

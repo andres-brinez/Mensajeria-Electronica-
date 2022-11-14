@@ -1,9 +1,11 @@
 # Importar el objeto Flask desde el paquete flask.
 from flask import Flask,render_template,redirect,url_for,flash,request,session
+from werkzeug.utils import secure_filename # para subir las imagenes
 import os # Importar el módulo os para poder acceder a las variables de entorno.
 from forms.forms  import * #  importar la carpeta de  los formularios con los formularios
 import controller as  DB
 from utils import ordenarLista
+
 
 
 # el session es creado al validar el usuario en el controller
@@ -134,7 +136,62 @@ def delete(id=None):
         return redirect(url_for('inicio', delete='true'))
     else:
         return redirect(url_for('inicio', delete='false'))
+
+@app.route('/edit/<string:id>',methods=['GET','POST'])
+def edit(id=None):
+
+
+    # si está logeado
+    if 'id' in session:
+
+        print(id)
+        form=FormMensaje()    
+
+        # si se está pidiendo el formulario
+        if request.method=='GET':
+            idUsuario= session['id']
+
+            respuesta=DB.ListaDestinatarios(idUsuario) #  trae los destinatarios como está en la base de datos
+
+            mensaje=DB.verMensaje(id)[0] # trae el mensaje con el id
+            
+            # print(mensaje)
+            
+            toID=mensaje[5]
+
+            destinatarios=ordenarLista.ordenar(respuesta,toID) # los ordena para que aparezca de primero el del id envíaddo
+
+            if len(mensaje)>0:
+                return render_template('editMensaje.html',form=form,usuarios=destinatarios,mensaje=mensaje)
+            else:
+                return redirect(url_for('inicio', edit='false'))
+
+
         
+            # si se envía el formulario por el metodo post 
+        elif  request.method=='POST':
+            print('formulario enviado')
+
+            idDestinatario = request.form["destino"] 
+            mensaje = request.form["mensaje"] 
+            asunto=request.form["asunto"]
+
+            print('destinatario',idDestinatario)
+            print('mensaje',mensaje)
+            print('asunto',asunto)
+
+            resultado=DB.UpdateMensaje(id,asunto,mensaje,idDestinatario)
+
+            if resultado==True:
+                return redirect(url_for('inicio', edit='true'))
+            else:
+                return redirect(url_for('inicio', edit='false'))
+
+    else:
+        return render_template('accesoDenegado.html')
+
+      
+       
 @app.route('/profile/<string:id>',methods=['GET','POST'])
 def profile(id=None):
     
@@ -164,31 +221,34 @@ def profile(id=None):
             
             return redirect(url_for('profile',id=id))
         
+        elif formProfile.validate_on_submit():
+            
+            print("formulario enviado correctamente")
+            
+            nombre = request.form["nombre"]            
+            email = request.form["email"]
+            about= request.fom['about']
+            company= request.fom['company']
+            job= request.fom['job']
+            celular= request.fom['celular']
+            country= request.fom['country']
+            img= request.fom['img']
+            filename= secure_filename(img.filename)# obtiene el nombre de la imagen
+
+            # guardar la imagen en el proyecto
+            img.save(os.path.join(app.config["UPLOAD_FOLDER"],filename))
+            resultado= DB.changeProfile(nombre,email)
+            
+            flash(resultado)
+            
+            return redirect(url_for('profile',id=id))
+        
+        
         resultado=DB.verPerfil(id)
-        # return resultado
+        print(resultado)
+        
         return render_template('profile.html', form=forms,profile=resultado)
     
-    
-            
-    
-        #     # si se envía el formulario por el metodo post 
-        # elif  request.method=='POST':
-        #     print('formulario enviado')
-            
-        #     idDestinatario = request.form["destino"] 
-        #     mensaje = request.form["mensaje"] 
-        #     asunto=request.form["asunto"]
-            
-        #     print('destinatario',idDestinatario)
-        #     print('mensaje',mensaje)
-        #     print('asunto',asunto)
-
-        #     resultado=DB.UpdateMensaje(id,asunto,mensaje,idDestinatario)
-            
-        #     if resultado==True:
-        #         return redirect(url_for('inicio', edit='true'))
-        #     else:
-        #         return redirect(url_for('inicio', edit='false'))
             
     else:
         return render_template('accesoDenegado.html')

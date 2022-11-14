@@ -245,8 +245,11 @@ def UpdateMensaje(idMensaje,asunto,mensaje,destinatario):
         return False
                
 def verPerfil(correo):
+    
+    
+    
     try:
-        
+           
         sql= "SELECT * from perfil p JOIN usuarios u ON u.correo  = p.email WHERE u.id  = '"+correo+"';"
         #selecciona los destinatarios (usuarios) que no sean el usuario logueado
 
@@ -306,3 +309,7 @@ def changePassword(passwordActual,passNew,passConfirm):
     except Exception as e:
         print("Error al traer los datos: " + str(e))
         return 'error al cambiar la contraseña'
+    
+    
+    
+# def editarPerfil()

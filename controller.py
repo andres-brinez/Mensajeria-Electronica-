@@ -246,23 +246,19 @@ def UpdateMensaje(idMensaje,asunto,mensaje,destinatario):
                
 def verPerfil(correo):
     
-    
-    
+
     try:
            
         sql= "SELECT * from perfil p JOIN usuarios u ON u.correo  = p.email WHERE u.id  = '"+correo+"';"
         #selecciona los destinatarios (usuarios) que no sean el usuario logueado
 
-        print(sql)
         
         resultado=ejecutarSentenciaSQL(sql)
-        print(resultado)
                 
         
         # para indicar si existe  o no existe
         # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
         if (len(resultado)>0):
-            print(resultado)
 
             return resultado
         else :
@@ -279,12 +275,9 @@ def changePassword(passwordActual,passNew,passConfirm):
         # hay diferentes metodos en hashlib para encriptar la contraseña
         password_codificada = hashlib.sha256(password_codificada).hexdigest() # encripta la contraseña
         
-        print(password_codificada, session['password'])
         
-        print()
         if  session['password']== password_codificada:
             
-            print(passNew,passConfirm)
             if passNew==passConfirm:
                 
                 
@@ -294,10 +287,8 @@ def changePassword(passwordActual,passNew,passConfirm):
                 password_codificada = hashlib.sha256(password_codificada).hexdigest() # encripta la contraseña
             
                 sql= "UPDATE usuarios SET password='"+password_codificada+"' WHERE id = "+str(session['id'])+";"
-                print(sql)
                 
                 resultado=ejecutarSentenciaSQL(sql)
-                print('resultado', resultado)
                 
                 return 'contraseña  actualizada'     
             
@@ -309,6 +300,22 @@ def changePassword(passwordActual,passNew,passConfirm):
     except Exception as e:
         print("Error al traer los datos: " + str(e))
         return 'error al cambiar la contraseña'
+    
+    
+       
+def editProfile(email,about,campany,job,celular,country,img):
+    try:
+        
+        sql= "UPDATE perfil SET about='"+about+"',company='"+campany+"',job='"+job+"',celular='"+celular+"',country='"+country+"',img='"+img+"' WHERE email = '"+email+"';"
+        print(sql)
+        resultado=ejecutarSentenciaSQL(sql)
+        print('resultado', resultado)
+                
+        return 'perfil actualizado'
+        
+    except Exception as e:
+        print("Error al traer los datos: " + str(e))
+        return 'Error al editar el perfil '
     
     
     

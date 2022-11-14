@@ -6,6 +6,10 @@ from forms.forms  import * #  importar la carpeta de  los formularios con los fo
 import controller as  DB
 from utils import ordenarLista
 
+# configuración imagenes
+UPLOAD_FOLDER= os.path.abspath("static\img\profile")
+# extenciones permitidad
+ALLOWED_EXTENSIONS=set(["png","jpg","jpeg"])
 
 
 # el session es creado al validar el usuario en el controller
@@ -16,7 +20,13 @@ ubicada. Necesitará hacerlo porque Flask configura algunas rutas en segundo pla
 
 app = Flask(__name__)
 
+def allowed_file(filename):
+    # solo permite subir imagenes de ese tipo  de extenciones  
+    return "." in filename and filename.rsplit(".",1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 app.secret_key = os.urandom(24) # Generar una clave secreta de 24 caracteres para el formulario.
+app.config["UPLOAD_FOLDER"]=UPLOAD_FOLDER
 
 """ RUTAS """
 # El decorador route de la aplicación (app) es el encargado de decirle a Flask qué URL debe ejecutar con su correspondiente función.
@@ -208,7 +218,7 @@ def profile(id=None):
         
 
         if(formPassword.validate_on_submit()):
-            print("formulario enviado correctamente")
+            print("formulario contraseña enviado correctamente")
             
             
             passwordActual = request.form["actual"]            
@@ -216,37 +226,51 @@ def profile(id=None):
             passwordConfirmar=request.form["confNueva"]
             
             resultado= DB.changePassword(passwordActual,passwordNueva,passwordConfirmar)
+            flash(resultado) 
             
-            flash(resultado)
-            
-            return redirect(url_for('profile',id=id))
-        
+                    
         elif formProfile.validate_on_submit():
             
-            print("formulario enviado correctamente")
+            print("formulario perfil enviado correctamente")
             
-            nombre = request.form["nombre"]            
-            email = request.form["email"]
-            about= request.fom['about']
-            company= request.fom['company']
-            job= request.fom['job']
-            celular= request.fom['celular']
-            country= request.fom['country']
-            img= request.fom['img']
+            # obtiene los datos
+            
+            email=request.form['email']
+            about= request.form['about']
+            company= request.form['company']
+            job= request.form['job']
+            celular= request.form['celular']
+            country= request.form['country']
+            img= request.files['img']
+            
             filename= secure_filename(img.filename)# obtiene el nombre de la imagen
-
-            # guardar la imagen en el proyecto
-            img.save(os.path.join(app.config["UPLOAD_FOLDER"],filename))
-            resultado= DB.changeProfile(nombre,email)
             
+            # si no se envía una imagen se  pone una por defecto 
+            if len(filename)<=0:
+                print(filename)
+                # imagen  por defecto
+                filename="profile-defecto.png"
+                
+            else:
+                
+                permitir_img= allowed_file(filename) # verifica si el archivo es de  una extención permitida
+                
+                if permitir_img==True:
+                    
+                    # guarda la imagen en la carpeta static
+                    img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                else:
+                    flash('ERROR - Solo se permiten imagenes con extención .png, .jpg, .jpeg')
+                    
+                    
+            # guarda los datos en la base de datos
+            resultado= DB.editProfile(email,about,company,job,celular,country,filename)
             flash(resultado)
-            
             return redirect(url_for('profile',id=id))
         
         
-        resultado=DB.verPerfil(id)
+        resultado=DB.verPerfil(id)[0]
         print(resultado)
-        
         return render_template('profile.html', form=forms,profile=resultado)
     
             
@@ -254,4 +278,4 @@ def profile(id=None):
         return render_template('accesoDenegado.html')
     
 
-
+    

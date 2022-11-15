@@ -83,6 +83,11 @@ def login ():
     
     return render_template('login.html',form=form) 
 
+@app.route('/logout')
+def logout():
+    # borra los datos de  la sesión
+    session.clear()
+    return redirect(url_for('login'))
 
 # inicio
 @app.route('/',methods=['GET','POST'])
@@ -260,7 +265,10 @@ def profile(id=None):
                     # guarda la imagen en la carpeta static
                     img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 else:
+                    
                     flash('ERROR - Solo se permiten imagenes con extención .png, .jpg, .jpeg')
+                    return redirect(url_for('profile',id=id))
+
                     
                     
             # guarda los datos en la base de datos

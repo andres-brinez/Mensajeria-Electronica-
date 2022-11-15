@@ -23,11 +23,10 @@
             <!--  onclick="ver(1)"  --> 
         <li  id="seccion1"onmouseover="ver(1)" >{{session['userName']}}</a><i class="fa-light fa-arrow-down-long"></i>
             <div onmouseout="ocultar(1)" id="subseccion1">
-                <div><p>va la descripcion</p></div>
-                <a href="{{url_for('profile',id=session['id'])}}">Perfil</a>              
-                <p><a  id="logout"> Cerrar sesión</a></p>
-                <p><a href="#"> Subsección uno tres</a></p>
-                <p><a href="#"> Subsección uno cuatro</a></p> 
+                <div id="correo"><p>{{session['correo']}}</p></div>
+                <a id="perfil" href="{{url_for('profile',id=session['id'])}}">Perfil</a>              
+                <a id="logout"> Cerrar sesión</a>
+                
             </div>
         </li>
         </ul>
@@ -81,7 +80,7 @@
                 </table>
 
                 {% else %}
-                <p>No hay mensajes enviados</p>
+                <p class="no-mensajes">No hay mensajes enviados</p>
             {% endif %}
         </div>
 
@@ -114,7 +113,7 @@
                 </table>
 
             {% else %}
-                <p>No hay mensajes recibidos</p>
+                <p class="no-mensajes">No hay mensajes recibidos</p>
             {% endif %}
 
         </div>

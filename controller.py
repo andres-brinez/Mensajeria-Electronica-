@@ -70,7 +70,7 @@ def registrarUsuarioDB(usuario,contrasena,email,):
         return False 
   
 # validar si el usuario existe
-def validarUsuarioDB(usuario,contrasena):    
+def validarUsuarioDB(correo,contrasena):    
     try:
         
         # encriptar la contraseña para compararla con la de la base de datos
@@ -79,7 +79,7 @@ def validarUsuarioDB(usuario,contrasena):
         password_codificada = hashlib.sha256(password_codificada).hexdigest() # encripta la contraseña
         
         # sentencia sql para validar el usuario
-        sql= "SELECT * FROM usuarios WHERE correo= '"+usuario+"' AND password= '"+password_codificada+"';"
+        sql= "SELECT * FROM usuarios WHERE correo= '"+correo+"' AND password= '"+password_codificada+"';"
         print(sql)
         # ejecutar sentencia y obtenes resultado
         resultado= ejecutarSentenciaSQL(sql)
@@ -96,6 +96,8 @@ def validarUsuarioDB(usuario,contrasena):
             session['id']=resultado[0][0]
             session['userName']=resultado[0][1]
             session['password']=resultado[0][2]
+            session['correo']=correo
+            
             print(session)
             return True # existe 
         
@@ -259,7 +261,6 @@ def verPerfil(correo):
         # para indicar si existe  o no existe
         # si en la consula a la base de datos trae  una respuesta con datos es que existe  y si no trae datos  no existe
         if (len(resultado)>0):
-
             return resultado
         else :
             return 'no existe ese perfil' 

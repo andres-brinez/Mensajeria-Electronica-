@@ -16,4 +16,38 @@ body{
     margin-bottom: 20px;
 }
 
+footer{
+    background: #012970;
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
 
+
+#footer {
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:30px;
+ }
+
+footer p {
+    margin: 10px;
+
+}
+
+/* poner el footer abajo */
+html {
+height: 100%;
+}
+
+body {
+display: flex;
+flex-direction: column;
+min-height: 100%;
+}
+
+footer {
+margin-top: auto;
+}

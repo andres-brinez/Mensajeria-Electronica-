@@ -122,14 +122,17 @@
  
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- mensaje cerrar sesión -->
-<script  src="/static/js/logout.js"></script>
+<script src="{{url_for('static',filename='js/logout.js')}}"></script>
+
 <!-- seleccionar solo un checkbox -->
-<script src="/static/js/checkBox.js"></script>
+<script src="{{url_for('static',filename='js/checkBox.js')}}"></script>
 <!-- eliminar-editar -->
-<script src="/static/js/EditarEliminar.js"></script>
+<script src="{{url_for('static',filename='js/EditarEliminar.js')}}"></script>
 <!-- Mensajes de edición e eliminación - confirmación -->
-<script src="/static/js/Mensajes.js"></script>
+<script src="{{url_for('static',filename='js/Mensajes.js')}}"></script>
 <!-- muestrá el menú despegable -->
+
+
 <script>
     
         function ver(n) {

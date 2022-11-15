@@ -20,10 +20,26 @@ ubicada. Necesitará hacerlo porque Flask configura algunas rutas en segundo pla
 
 app = Flask(__name__)
 
+""" Otra forma de trabajar con las url """
+# if __name__=='__main__':
+#    app.add_url_rule('ruta'view_func=funcion)
+#    app.add_url_rule('/register' ,view_func=register)
+
 def allowed_file(filename):
     # solo permite subir imagenes de ese tipo  de extenciones  
     return "." in filename and filename.rsplit(".",1)[1].lower() in ALLOWED_EXTENSIONS
 
+""" Callbacks: Métodos antes y despúes de las peticiones """
+@app.before_request
+def before_request():
+    print("Antes de la petición")
+    
+@app.after_request
+def after_request(response):
+    print("Después de la petición")
+    return response
+
+    
 
 app.secret_key = os.urandom(24) # Generar una clave secreta de 24 caracteres para el formulario.
 app.config["UPLOAD_FOLDER"]=UPLOAD_FOLDER

@@ -21,8 +21,8 @@
     <div id="navegador">
         <ul>
             <!--  onclick="ver(1)"  --> 
-        <li  id="seccion1"onmouseover="ver(1)" onmouseout="ocultar(1)">{{session['userName']}}</a><i class="fa-light fa-arrow-down-long"></i>
-            <div id="subseccion1">
+        <li  id="seccion1"onmouseover="ver(1)" >{{session['userName']}}</a><i class="fa-light fa-arrow-down-long"></i>
+            <div onmouseout="ocultar(1)" id="subseccion1">
                 <div><p>va la descripcion</p></div>
                 <a href="{{url_for('profile',id=session['id'])}}">Perfil</a>              
                 <p><a  id="logout"> Cerrar sesión</a></p>
@@ -39,81 +39,88 @@
 
 {% block body %}
     
-
-    <!-- MENSAJES ENVIADOS -->
-    {% if messagesEnd != 'no mensajes' %}
-        <caption>Mensajes Enviados</caption>
-        <a href="{{url_for('sendMessage')}}">Envíar mensaje</a>        
-        <a class="btnEliminar" href="">eliminar</a>
-        <a class="btnEditar" href="">Editar</a>
-
-        <!-- TABLA mensajes enviados -->
-         <table>
-            <thead>
-                <tr>
-                    <th></th>    
-                    <th>Destinatarios</th>
-                    <th>Asunto</th>
-                    <th>Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-
-        {% for message in messagesEnd %}
-           
-            <tr>
-            
-                <td><input class="checkbox" type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
-                <td>{{message[1]}}</td>
-                <td>{{message[2]}}</td>
-                <td>{{message[3]}}</td>
-            </tr>
-               
-        {% endfor %}
-            </tbody>
-        </table>
-
-    {% else %}
-        <p>No hay mensajes enviados</p>
-    {% endif %}
-            
-
-    <!-- MENSAJES Recibidos -->
-    {% if messagesRecibidos != 'no mensajes' %}
-    <caption>Mensajes Recibidos</caption>
-    <!-- TABLA  -->
-    <table>
-        <thead>
-            <tr>
-                <th></th>    
-                <th>Remitente</th>
-                <th>Asunto</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-        <tbody>
-    {% for message in messagesRecibidos %}
-        
-        <tr>
-            <td><input id="id-recibido"  type="hidden" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
-            <td>{{message[1]}}</td> 
-            <td>{{message[2]}}</td>
-            <td>{{message[3]}}</td>
-        </tr>
-            
-    {% endfor %}
-        </tbody>
-    </table>
-
-{% else %}
-    <p>No hay mensajes recibidos</p>
-{% endif %}
+    <a id="endMessage" href="{{url_for('sendMessage')}}">Envíar mensaje</a>        
 
 
+    <div class="mensajes">
+        <!-- MENSAJES ENVIADOS -->
+        <div class="mensajesEnviados">
+            {% if messagesEnd != 'no mensajes' %}
+                <div class="nav">
+                    <h3 class="title">Mensajes Enviados </h3>
+                    <div class="crud">
+                        <a class="btnEliminar" href="">Eliminar</a>
+                        <a class="btnEditar" href="">Editar</a>
+                    </div>
+                </div>
 
-   
+                <!-- TABLA mensajes enviados -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>    
+                            <th>Destinatarios</th>
+                            <th>Asunto</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-    
+                {% for message in messagesEnd %}
+                
+                    <tr>
+                    
+                        <td><input class="checkbox" type="checkbox" name="message" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
+                        <td>{{message[1]}}</td>
+                        <td>{{message[2]}}</td>
+                        <td>{{message[3]}}</td>
+                    </tr>
+                    
+                {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+                <p>No hay mensajes enviados</p>
+            {% endif %}
+        </div>
+
+        <!-- MENSAJES Recibidos -->
+        <div class="mensajesRecibidos">
+            {% if messagesRecibidos != 'no mensajes' %}
+            <h3 class="title">Mensajes Recibidos </h3>
+                <!-- TABLA  -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>    
+                            <th>Remitente</th>
+                            <th>Asunto</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {% for message in messagesRecibidos %}
+                    
+                    <tr>
+                        <td><input id="id-recibido"  type="hidden" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
+                        <td>{{message[1]}}</td> 
+                        <td>{{message[2]}}</td>
+                        <td>{{message[3]}}</td>
+                    </tr>
+                        
+                {% endfor %}
+                    </tbody>
+                </table>
+
+            {% else %}
+                <p>No hay mensajes recibidos</p>
+            {% endif %}
+
+        </div>
+    </div>
+
+ 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- mensaje cerrar sesión -->
 <script  src="/static/js/logout.js"></script>

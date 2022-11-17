@@ -5,6 +5,7 @@ body{
 
 #profile{
   border: solid 1px green ;
+  
   display: flex;
   justify-content: center;
   justify-content: space-around;
@@ -15,6 +16,7 @@ body{
 .box{
   border: solid 1px red;
   width: 50%;
+  /* min-height: 100px; */
 
 }
 
@@ -28,9 +30,8 @@ body{
   cursor: pointer;
   padding:10px 20px;
   margin:0px 2px;
-  background:#000;
   display:inline-block;
-  color:#fff;
+  color: #3a4459;
   border-radius:3px 3px 0px 0px;
   /* box-shadow: 0 0.5rem 0.8rem #00000080; */
 }
@@ -38,10 +39,11 @@ body{
 .tabs{
     margin: auto;
     width: 500px;
+    border-bottom: #eceff4 2px solid;
 
 }
 .panels{
-  box-shadow: 0 2rem 2rem #00000080;
+  min-height: 100%;
   width:100%;
   border-radius:3px;
   overflow:hidden;
@@ -74,8 +76,7 @@ body{
 #one:checked ~ .tabs #one-tab,
 #two:checked ~ .tabs #two-tab,
 #three:checked ~ .tabs #three-tab{
-  background:#fffffff6;
-  color:#000;
-
-  border-top: 3px solid #000;
+  background-color: #fff;
+  color: #4154f1;
+  border-bottom: 2px solid #4154f1
 }

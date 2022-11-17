@@ -10,6 +10,7 @@ const  button = document.getElementById('logout')
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, cerrar sesión'
+            
             })
             .then((result) => {
                 if (result.isConfirmed) {

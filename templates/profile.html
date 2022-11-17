@@ -30,119 +30,124 @@
 {% endblock %}
 {% block body %}
   
-
-  <h2>Perfil</h2>
   
-  <!-- obtiene los mensajes flash --> 
-  {% with messages = get_flashed_messages() %} 
-    {% if messages %} <!-- si hay mensajes -->      
-      {% for message in messages %} <!-- Recorre los mensajes -->
-
-        {% if message == 'contraseña  actualizada' or message== 'perfil actualizado' %} <!-- si el mensaje es de contraseña actualizada -->
-          <div id="success" role="alert">
-            {{message}}
-          </div>
-        {% else %} <!-- si el mensaje es de error -->
-          <p id="error">{{ message }}</p>
-        {% endif %}
-      {% endfor %}  
-    {% endif %}
-  {% endwith %}
-
-  <!-- <div class="warpper"> -->
-    <input class="radio" id="one" name="group" type="radio" checked>
-    <input class="radio" id="two" name="group" type="radio">
-    <input class="radio" id="three" name="group" type="radio">
-
-    <div class="tabs">
-    <label class="tab" id="one-tab" for="one">Perfil</label>
-    <label class="tab" id="two-tab" for="two">Editar Perfil</label>
-    <label class="tab" id="three-tab" for="three">Cambio contraseña</label>
-    </div>
-    
-    <div class="panels">
-      <!-- ver pefil -->
-      <div class="panel" id="one-panel">
-
-          <h5>Sobre  mi </h5>
-          <p>{{profile[2]}}</p>
-
-          <h5>Detalles del perfil</h5>
-          <p>Nombre: {{profile[9]}}</p> 
-          <p>Correo: {{profile[1]}}</p>
-          <p>Telefono: {{profile[5]}}</p>
-          <p>Compañia: {{profile[3]}}</p>
-          <p>Cargo: {{profile[4]}}</p>
-          <p>Pais: {{profile[6]}}</p>
-      
-
-          
-                       
+    <section id="profile">
+      <div class="presentation">
+        <p>Aquí va la imagenes de perfil con más información</p>
       </div>
-      <!-- editar perfil -->
-      <div class="panel" id="two-panel">
-        <!-- lo que se hace al envíar el formulario se programa en las rutas (app - /login) -->
-        <form action="{{url_for('profile',id=profile[8])}}" method="POST" enctype="multipart/form-data">
-          {{ form['formProfile'].csrf_token }} <!-- esto es un token para evitar ataques -->
-
-          <label for="nombre">Nombre</label>
-          <input type="text " id="nombre" readonly value="{{profile[9]}}">
-          
-          <label for="email">Email</label>
-          <input type="email " id="email" name="email" readonly value="{{profile[1]}}">
-
-          {{ form['formProfile'].about.label}}
-          {{ form['formProfile'].about(value=profile[2])}}
-
-          {{ form['formProfile'].company.label}}
-          {{ form['formProfile'].company(value=profile[3])}}
-          
-          {{ form['formProfile'].job.label}}
-          {{ form['formProfile'].job(value=profile[4])}}
-
-          {{ form['formProfile'].celular.label}}
-          {{ form['formProfile'].celular(value=profile[5])}}
-
-          {{ form['formProfile'].country.label}}
-          {{ form['formProfile'].country(value=profile[6])}}
-
-          {{ form['formProfile'].img.label}}
-          {{ form['formProfile'].img(value=profile[3])}}
-
-          {{form['formProfile']. btnEnviar()}}
-
-        </form>
-
-        <div class="box">
-          <img src="/static/img/profile/{{profile[7]}}" alt="profile">
-          <p>{{profile[9]}}</p>
-          <p>{{profile[4]}}</p>
+      <div class="box">
+  
+          <!-- obtiene los mensajes flash --> 
+          {% with messages = get_flashed_messages() %} 
+          {% if messages %} <!-- si hay mensajes -->      
+            {% for message in messages %} <!-- Recorre los mensajes -->
+  
+              {% if message == 'contraseña  actualizada' or message== 'perfil actualizado' %} <!-- si el mensaje es de contraseña actualizada -->
+                <div id="success" role="alert">
+                  {{message}}
+                </div>
+              {% else %} <!-- si el mensaje es de error -->
+                <p id="error">{{ message }}</p>
+              {% endif %}
+            {% endfor %}  
+          {% endif %}
+        {% endwith %}
+  
+        <input class="radio" id="one" name="group" type="radio" checked>
+        <input class="radio" id="two" name="group" type="radio">
+        <input class="radio" id="three" name="group" type="radio">
+  
+        <div class="tabs">
+        <label class="tab" id="one-tab" for="one">Perfil</label>
+        <label class="tab" id="two-tab" for="two">Editar Perfil</label>
+        <label class="tab" id="three-tab" for="three">Cambio contraseña</label>
         </div>
-
-      </div>
-      <!-- cambio de contraseña -->
-      <div class="panel" id="three-panel">
         
-        <!-- lo que se hace al envíar el formulario se programa en las rutas (app - /login) -->
-        <form action="" method="POST">
-          {{ form['formPassword'].csrf_token }} <!-- esto es un token para evitar ataques -->
-
-          <p>{{ form['formPassword'].csrf_token }}</p>
-          {{ form['formPassword'].actual.label}}
-          {{ form['formPassword'].actual()}}
-
-          {{ form['formPassword'].nueva.label}}
-          {{ form['formPassword'].nueva()}}
-
-          {{ form['formPassword'].confNueva.label}}
-          {{ form['formPassword'].confNueva()}}
-
-          {{form['formPassword'].submit}}
-
-      
+        <div class="panels">
+          <!-- ver pefil -->
+          <div class="panel" id="one-panel">
+  
+              <h5>Sobre  mi </h5>
+              <p>{{profile[2]}}</p>
+  
+              <h5>Detalles del perfil</h5>
+              <p>Nombre: {{profile[9]}}</p> 
+              <p>Correo: {{profile[1]}}</p>
+              <p>Telefono: {{profile[5]}}</p>
+              <p>Compañia: {{profile[3]}}</p>
+              <p>Cargo: {{profile[4]}}</p>
+              <p>Pais: {{profile[6]}}</p>
+          
+  
+              
+                          
+          </div>
+          <!-- editar perfil -->
+          <div class="panel" id="two-panel">
+            <!-- lo que se hace al envíar el formulario se programa en las rutas (app - /login) -->
+            <form action="{{url_for('profile',id=profile[8])}}" method="POST" enctype="multipart/form-data">
+              {{ form['formProfile'].csrf_token }} <!-- esto es un token para evitar ataques -->
+  
+              <label for="nombre">Nombre</label>
+              <input type="text " id="nombre" readonly value="{{profile[9]}}">
+              
+              <label for="email">Email</label>
+              <input type="email " id="email" name="email" readonly value="{{profile[1]}}">
+  
+              {{ form['formProfile'].about.label}}
+              {{ form['formProfile'].about(value=profile[2])}}
+  
+              {{ form['formProfile'].company.label}}
+              {{ form['formProfile'].company(value=profile[3])}}
+              
+              {{ form['formProfile'].job.label}}
+              {{ form['formProfile'].job(value=profile[4])}}
+  
+              {{ form['formProfile'].celular.label}}
+              {{ form['formProfile'].celular(value=profile[5])}}
+  
+              {{ form['formProfile'].country.label}}
+              {{ form['formProfile'].country(value=profile[6])}}
+  
+              {{ form['formProfile'].img.label}}
+              {{ form['formProfile'].img(value=profile[3])}}
+  
+              {{form['formProfile']. btnEnviar()}}
+  
+            </form>
+  
+            <div class="box">
+              <img src="/static/img/profile/{{profile[7]}}" alt="profile">
+              <p>{{profile[9]}}</p>
+              <p>{{profile[4]}}</p>
+            </div>
+  
+          </div>
+          <!-- cambio de contraseña -->
+          <div class="panel" id="three-panel">
+            
+            <!-- lo que se hace al envíar el formulario se programa en las rutas (app - /login) -->
+            <form action="" method="POST">
+              {{ form['formPassword'].csrf_token }} <!-- esto es un token para evitar ataques -->
+  
+              <p>{{ form['formPassword'].csrf_token }}</p>
+              {{ form['formPassword'].actual.label}}
+              {{ form['formPassword'].actual()}}
+  
+              {{ form['formPassword'].nueva.label}}
+              {{ form['formPassword'].nueva()}}
+  
+              {{ form['formPassword'].confNueva.label}}
+              {{ form['formPassword'].confNueva()}}
+  
+              {{form['formPassword'].submit}}
+  
+          
+          </div>
+          
+        </div>
       </div>
-    </div>
-  <!-- </div> -->
+    </section>
 
 
 

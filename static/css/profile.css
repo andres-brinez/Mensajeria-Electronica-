@@ -2,13 +2,29 @@
 body{
   font-family: 'Arimo', sans-serif;
 }
-h2{
-  color:#000;
-  text-align:center;
-  font-size:2em;
+
+#profile{
+  border: solid 1px green ;
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  margin: auto 0  ;
+}
+
+
+.box{
+  border: solid 1px red;
+  width: 50%;
+
+}
+
+.presentation{
+  width: 30%;
+  border: solid 1px blue;
 }
 
 .tab{
+
   cursor: pointer;
   padding:10px 20px;
   margin:0px 2px;
@@ -25,7 +41,6 @@ h2{
 
 }
 .panels{
-  /* background:red; */
   box-shadow: 0 2rem 2rem #00000080;
   width:100%;
   border-radius:3px;
@@ -61,5 +76,6 @@ h2{
 #three:checked ~ .tabs #three-tab{
   background:#fffffff6;
   color:#000;
+
   border-top: 3px solid #000;
 }

@@ -21,11 +21,11 @@ h1{
     font-family: "Nunito", sans-serif;
     font-size: 35px;
     font-weight: 700;
-    color: #012970
+    color: #012970;
 }
 
 .logo a {
-    width: 90%;
+    text-decoration: none;
     display: flex;
     margin: 0;
     padding: 0;

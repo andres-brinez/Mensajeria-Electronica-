@@ -1,23 +1,31 @@
 {%extends 'base.html'%} 
 <title>{% block title %}Envíar mensaje {% endblock %}</title>
-
+{% block style %}<link rel="stylesheet" href="/static/css/Messages.css" />{% endblock %}> 
 
 {% block body %}
+
+<h1>Envíar Mensaje </h1>
 
 <form action="{{url_for('sendMessage')}}" method="POST">
 
     {{ form.csrf_token }} <!-- esto es un token para evitar ataques -->
-    {{ form.asunto(placeholder="asunto" )}}
-    {{ form.mensaje(size=30,placeholder='mensaje') }}
 
-    <!-- select -->
-    <select name="destino" id="destino">
-        <option value="">Usuario a envíar mensaje</option>
+     <!-- select -->
+     <p>Usuario a envíar mensaje</p>
+     <select name="destino" id="destino">
         {%for usuario in usuarios%}
         <option value={{usuario[0]}}>{{usuario[1]}}</option>
         
         {%endfor%}
     </select>
+
+    {{ form.asunto.label}}
+    {{ form.asunto(placeholder="Asunto" )}}
+
+    <p>Mensaje</p>
+    {{ form.mensaje(size=30,placeholder='Mensaje') }}
+
+   
     
     {{form.submit}}
 

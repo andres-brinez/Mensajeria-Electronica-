@@ -1,17 +1,19 @@
 {%extends 'base.html'%} 
 <title>{% block title %}Editar  mensaje {% endblock %}</title>
-
+{% block style %}<link rel="stylesheet" href="/static/css/Messages.css" />{% endblock %}> 
 
 {% block body %}
 
+<h1>Editar mensaje</h1>
+
 <form action="" method="POST">
-    <p>mensje {{mensaje[1]}}</p>
     {{ form.csrf_token }} <!-- esto es un token para evitar ataques -->
-    {{ form.asunto.label}}
-    {{ form.asunto(value= mensaje[1])}}
     
-    {{ form.mensaje.label}}
-    {{ form.mensaje(value= mensaje[2])}}
+    <label for="id">ID mensaje</label>
+    <input readonly id="id" type="text" value="{{mensaje[0]}}">
+
+    <label for="fecha">Fecha envío</label>
+    <input readonly id="fecha" type="text" value="{{mensaje[3]}}">
 
     <!-- select -->
     <p>Destinatario</p>
@@ -22,11 +24,15 @@
         {%endfor%}
     </select>
     
-    <label for="id">ID mensaje</label>
-    <input readonly id="id" type="text" value="{{mensaje[0]}}">
+    {{ form.asunto.label}}
+    {{ form.asunto(value= mensaje[1])}}
 
-    <label for="id">Fecha envío</label>
-    <input readonly id="id" type="text" value="{{mensaje[3]}}">
+
+    <label for="mensaje">Mensaje</label>
+    <textarea name="mensaje" id="mensaje" cols="30" rows="10">{{mensaje[2]}}</textarea>    
+
+        
+    
     {{form.submit}}
 
     

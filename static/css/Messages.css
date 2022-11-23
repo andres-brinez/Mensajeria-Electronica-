@@ -1,0 +1,69 @@
+h1{
+    text-align: center;
+    margin-top: 30px;
+}
+
+form{
+    margin: 60px  auto 0px auto;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+label,p{
+    margin: 10px 0 ;
+    color: #444447;
+}
+
+input{
+    margin-bottom: 30px;
+    padding: 10px 12px;
+    border: solid 1px #CED4DA;
+    border-radius: 5px;
+
+}
+
+input:read-only {
+     background: rgb(232, 224, 224); 
+    }
+
+input:read-only:focus{
+        outline: none;
+        border: none;
+    }
+    
+
+select{
+    font-family: 'Lexend Deca';
+    margin-bottom: 30px;
+    padding: 10px 12px;
+    background-color: white;
+    border: solid 1px #CED4DA;
+    border-radius: 5px;
+}
+
+textarea{
+    min-height: 300px;
+    margin-bottom: 30px;
+    padding: 10px 12px;
+    border: solid 1px #CED4DA;
+    border-radius: 5px;
+    /* resize:none;  para que el textarea no pueda cambiar de  tamaño*/
+    resize:vertical; 	/* El elemento es redimensionable en el eje vertical. */
+
+}
+input[type=submit]{
+    margin: 20px auto;
+    padding: 5px 12px;
+    border-radius: 5px;
+    background: #0D6EFD ;
+    cursor: pointer;
+    color: white;
+    width: 25%;
+    height: 35px;
+    }
+
+
+
+/* outline: none;
+border: solid 1px #0D6EFD; */

@@ -27,8 +27,8 @@ class FormRegister(FlaskForm):
 class FormMensaje(FlaskForm):
     # tipo text area
     
-    asunto = StringField('asunto', validators=[DataRequired(message='Este campo es requerido')])
-    mensaje = TextAreaField('mensaje', validators=[DataRequired(message='Este campo es requerido')])
+    asunto = StringField('Asunto', validators=[DataRequired(message='Este campo es requerido')])
+    mensaje = TextAreaField('Mensaje', validators=[DataRequired(message='Este campo es requerido')])
     submit=SubmitField('Envíar')
 
 class FormPassword(FlaskForm):

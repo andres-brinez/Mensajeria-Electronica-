@@ -1,6 +1,6 @@
 from logging import PlaceHolder
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField,EmailField,SubmitField,FileField
+from wtforms import StringField, PasswordField, BooleanField,EmailField,SubmitField,FileField,TextAreaField
 from wtforms.validators import DataRequired
 
 class FormEjemplo(FlaskForm):
@@ -25,8 +25,10 @@ class FormRegister(FlaskForm):
     
 
 class FormMensaje(FlaskForm):
+    # tipo text area
+    
     asunto = StringField('asunto', validators=[DataRequired(message='Este campo es requerido')])
-    mensaje = StringField('mensaje', validators=[DataRequired(message='Este campo es requerido')])
+    mensaje = TextAreaField('mensaje', validators=[DataRequired(message='Este campo es requerido')])
     submit=SubmitField('Envíar')
 
 class FormPassword(FlaskForm):

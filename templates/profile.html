@@ -130,15 +130,21 @@
             <form action="" method="POST">
               {{ form['formPassword'].csrf_token }} <!-- esto es un token para evitar ataques -->
   
-              <p>{{ form['formPassword'].csrf_token }}</p>
-              {{ form['formPassword'].actual.label}}
-              {{ form['formPassword'].actual()}}
-  
-              {{ form['formPassword'].nueva.label}}
-              {{ form['formPassword'].nueva()}}
-  
-              {{ form['formPassword'].confNueva.label}}
-              {{ form['formPassword'].confNueva()}}
+              <div class="password">
+                {{ form['formPassword'].actual.label}}
+                {{ form['formPassword'].actual()}}
+              </div>
+
+              <div class="password">
+                {{ form['formPassword'].nueva.label}}
+                {{ form['formPassword'].nueva()}}
+              </div>
+
+              <div class="password">
+                {{ form['formPassword'].confNueva.label}}
+                {{ form['formPassword'].confNueva()}}
+
+              </div>
   
               {{form['formPassword'].submit}}
   

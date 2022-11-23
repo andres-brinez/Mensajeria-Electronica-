@@ -3,6 +3,7 @@ body{
   font-family: 'Arimo', sans-serif;
 }
 
+/* Encabezados */
 #profile{
   border: solid 1px green ;
   
@@ -15,6 +16,7 @@ body{
 
 .box{
   border: solid 1px red;
+  padding: 0px 80px;
   width: 50%;
   /* min-height: 100px; */
 
@@ -79,4 +81,34 @@ body{
   background-color: #fff;
   color: #4154f1;
   border-bottom: 2px solid #4154f1
+}
+
+
+
+.password{
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  margin: 20px  ;
+  align-items: center;
+
+}
+
+
+input{
+  padding: 10px 12px;
+  border: solid 1px #CED4DA;
+  border-radius: 5px;
+
+}
+
+input[type=submit]{
+  margin:50px auto;
+  padding: 5px 12px;
+  border-radius: 5px;
+  background: #0D6EFD ;
+  cursor: pointer;
+  color: white;
+  display: block;
+  height: 45px;
 }

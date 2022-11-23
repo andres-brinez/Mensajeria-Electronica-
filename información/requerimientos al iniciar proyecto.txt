@@ -6,3 +6,5 @@ se debe saber si tiene python instalado con Python --version de  lo contrario se
 
 Ejecuta el siguiente comando para instalar Flask-WTF - sirve para los formularios
 5 pip install flask-wtf
+
+- Ejecutar servidor  flask --debug run

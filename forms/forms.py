@@ -44,5 +44,5 @@ class FormProfile(FlaskForm):
     celular = StringField('celular')
     country = StringField('Pais')
     img =FileField(u'img')
-    btnEnviar=SubmitField('Envíar')
+    btnEnviar=SubmitField('Guardar cambios')
     

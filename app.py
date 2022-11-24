@@ -5,6 +5,7 @@ import os # Importar el módulo os para poder acceder a las variables de entorno
 from forms.forms  import * #  importar la carpeta de  los formularios con los formularios
 import controller as  DB
 from utils import ordenarLista
+import json # pasar a json
 
 # configuración imagenes
 UPLOAD_FOLDER= os.path.abspath("static\img\profile")
@@ -62,7 +63,7 @@ def register():
         password=request.form["password"]
         
         registro= DB.registrarUsuarioDB(nombre,password,email) #devuelve true o false si pudo registrar usuario 
-
+        print('usuario registrado')
         if registro:
             return redirect(url_for('register',register='ok')) 
         
@@ -119,7 +120,7 @@ def inicio():
         print(Enviados)
         print(Recibidos)
         
-        return render_template('index.html',messagesEnd=Enviados,messagesRecibidos=Recibidos)
+        return render_template('index.html',messagesEnd=Enviados,messagesRecibidos=Recibidos,json=json.dumps(Recibidos))
     else:
         return render_template('accesoDenegado.html')
     
@@ -262,7 +263,8 @@ def profile(id=None):
             job= request.form['job']
             celular= request.form['celular']
             country= request.form['country']
-            img= request.files['img']
+            img= request.files['file']
+            print(img)
             
             filename= secure_filename(img.filename)# obtiene el nombre de la imagen
             
@@ -294,7 +296,8 @@ def profile(id=None):
         
         
         resultado=DB.verPerfil(id)[0]
-        print(resultado)
+        print('resultado',resultado)
+        print('hola')
         return render_template('profile.html', form=forms,profile=resultado)
     
             

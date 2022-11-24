@@ -58,9 +58,9 @@ def registrarUsuarioDB(usuario,contrasena,email,):
         sql= "INSERT INTO usuarios (name,password,correo) VALUES ('"+usuario+"','"+ password_codificada+"','"+email+"');"
         print(sql)
         ejecutarSentenciaSQL(sql)
-        sql="INSERT INTO perfil (usuarioEmail)Values ('"+email+"');"# para el perfil
+        sql="INSERT INTO perfil (email,img)Values ('"+email+"','profile-defecto.png');"# para el perfil
         resultado= ejecutarSentenciaSQL(sql)
-        print(resultado)
+        print('imprimir resultado',resultado)
         
         if len(resultado)==0:
             return True
@@ -134,7 +134,7 @@ def MensajesRecibidos(origen):
     try:
         """ UTILICÉ EL JOIN ON PARA UNIR LA TABLA DE USAURIOS Y MENSAJES Y ASI PODER CAMBIAR EL ID DEL USUARIO QUE RECIBE POR SU NOMBRRE PARA PODERLO MOSTRAR EN EL FRONT """
         
-        sql= "SELECT \"mensajeID\",\"from\",asunto,fecha,u.\"name\" FROM mensajes m  JOIN usuarios u ON m.\"to\"  = u.id WHERE \"name\" = '"+origen+"' ORDER BY fecha DESC ;"
+        sql= "SELECT \"mensajeID\",\"from\",asunto,fecha,u.\"name\", \"mensaje\" FROM mensajes m  JOIN usuarios u ON m.\"to\"  = u.id WHERE \"name\" = '"+origen+"' ORDER BY fecha DESC ;"
         print(sql)
         resultado= ejecutarSentenciaSQL(sql)
         print(resultado)

@@ -3,33 +3,30 @@ body{
     font-family: 'Lexend Deca';
 }
 
-#error{
-    color: red;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-#success{
-    color: green;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
 
 footer{
-    background: #012970;
-    color: #fff;
+    border-top: 1px solid #cddfff;
+    padding: 20px 0;
+    color: #012972;
     width: 100%;
     padding: 20px;
     text-align: center;
 }
 
+footer p a{
 
+    color:#4183F7 ;
+    text-decoration: none;
+}
+
+/* para que se quede fijo al final  */
 #footer {
     position:fixed;
     left:0px;
     bottom:0px;
     height:30px;
- }
+} 
+ 
 
 footer p {
     margin: 10px;
@@ -48,5 +45,5 @@ min-height: 100%;
 }
 
 footer {
-margin-top: 100px;
+margin-top: auto;
 }

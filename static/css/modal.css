@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+p{
+    color: black;
+}
+.page{
+    background: url(img/foto.jpg) center;
+    height: 100vh; 
+    display: flex;          
+    justify-content: center;
+    align-items: center;
+}
+.fondo_transparente{
+    
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100vh ;
+    width: 100%;
+    display: none;
+}
+.modal{
+    background: linear-gradient(0deg,white 70%, #012970 30%);
+    width: 600px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 30px;
+
+}
+.modal_cerrar{
+    background: white;
+    position: absolute;
+    right: -20px;
+    /* color: crims; */
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.modal_titulo{
+    color: white;
+    font-size: 40px;
+}
+.modal_mensaje{            
+   padding: 10px 30px;
+}
+.modal_botones{      
+    width: 100%;    
+   background: whitesmoke;
+   border-top:whitesmoke 1px;
+   padding-top: 20px;
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.boton{
+    background: white;
+    padding: 8px 30px;
+    color: #012970;
+    text-decoration: none;
+    border-radius: 25px;
+    border:1px solid #012970
+}
+.boton:hover{
+    background: #012970;
+    color: white;
+}

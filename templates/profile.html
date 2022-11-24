@@ -33,7 +33,21 @@
   
     <section id="profile">
       <div class="presentation">
-        <p>Aquí va la imagenes de perfil con más información</p>
+        <div class="box">
+          <img class="img-presentation" src="/static/img/profile/{{profile[7]}}" alt="profile">
+          <p>{{profile[9]}}</p>
+          <p>{{profile[4]}}</p>
+          <div class="media">
+            
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174848.png" alt="icon facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="icon instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174883.png" alt="icon twitter">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174876.png" alt="icon youtube">
+
+
+
+          </div>
+        </div>
       </div>
       <div class="box">
   
@@ -67,16 +81,41 @@
           <!-- ver pefil -->
           <div class="panel" id="one-panel">
   
-              <h5>Sobre  mi </h5>
-              <p>{{profile[2]}}</p>
+              <h2>Sobre  mi </h2>
+              <p id="">{{profile[2]}}</p>
   
-              <h5>Detalles del perfil</h5>
-              <p>Nombre: {{profile[9]}}</p> 
-              <p>Correo: {{profile[1]}}</p>
-              <p>Telefono: {{profile[5]}}</p>
-              <p>Compañia: {{profile[3]}}</p>
-              <p>Cargo: {{profile[4]}}</p>
-              <p>Pais: {{profile[6]}}</p>
+              <h2>Detalles del perfil</h2>
+
+              <div class="profile">
+                <p>Nombre</p> 
+                <p>{{profile[9]}}</p>
+              </div>
+
+              <div class="profile">
+                <p>Correo</p> 
+                <p>{{profile[1]}}</p>
+              </div>
+
+              <div class="profile">
+                <p>Telefono</p> 
+                <p>{{profile[5]}}</p>
+              </div>
+
+              <div class="profile">
+                <p>Compañia</p> 
+                <p>{{profile[3]}}</p>
+              </div>
+
+              <div class="profile">
+                <p>Cargo</p> 
+                <p>{{profile[4]}}</p>
+              </div>
+
+              <div class="profile">
+                <p>Pais</p> 
+                <p>{{profile[6]}}</p>
+              </div>
+
           
   
               
@@ -87,40 +126,78 @@
             <!-- lo que se hace al envíar el formulario se programa en las rutas (app - /login) -->
             <form action="{{url_for('profile',id=profile[8])}}" method="POST" enctype="multipart/form-data">
               {{ form['formProfile'].csrf_token }} <!-- esto es un token para evitar ataques -->
+
+              <div class="box-img">
+                <p>Imagen de perfil</p>
+                <div class="container">
+                  <img  src="/static/img/profile/{{profile[7]}}" alt="profile">
+
+                  <!-- icon trash -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style=" opacity: 1; -webkit-text-stroke-width: 0px;">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                  </svg>
+                  
+                  <!-- subir archivos , se usa el estilo para .inputfile que esta en profile.css para ocultar  -->
+                  <input type="file" name="file" id="file" class="inputfile" data-multiple-caption="{count} files selected" multiple />
+                  <label for="file">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                      <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                    </svg>
+                  </label>
+
+
+               
+                </div>
+                <!-- muesttra el nombre de la imagen cargads -->
+                <p class="file-select"></p>
+                
+              </div>
   
-              <label for="nombre">Nombre</label>
-              <input type="text " id="nombre" readonly value="{{profile[9]}}">
+      
+              <div class="edit">
+                <label for="nombre">Nombre</label>
+                <input type="text " id="nombre" readonly value="{{profile[9]}}">
+              </div>
+
+              <div class="edit">
+                <label for="email">Email</label>
+                <input type="email " id="email" name="email" readonly value="{{profile[1]}}">
+              </div>
+              <div class="edit">
+                <label for="about">Acerca de mi</label>
+                <textarea name="about" id="about" cols="30" rows="10">{{profile[2]}}</textarea>
+              </div>
+
+              <div class="edit">
+                {{ form['formProfile'].company.label}}
+                {{ form['formProfile'].company(value=profile[3])}}
+              </div>
+
+              <div class="edit">
+                {{ form['formProfile'].job.label}}
+                {{ form['formProfile'].job(value=profile[4])}}
+              </div>
               
-              <label for="email">Email</label>
-              <input type="email " id="email" name="email" readonly value="{{profile[1]}}">
+              <div class="edit">
+                {{ form['formProfile'].celular.label}}
+                {{ form['formProfile'].celular(value=profile[5])}}
+              </div>
+
+              <div class="edit">
+                {{ form['formProfile'].country.label}}
+                {{ form['formProfile'].country(value=profile[6])}}  
+              </div>  
   
-              {{ form['formProfile'].about.label}}
-              {{ form['formProfile'].about(value=profile[2])}}
-  
-              {{ form['formProfile'].company.label}}
-              {{ form['formProfile'].company(value=profile[3])}}
-              
-              {{ form['formProfile'].job.label}}
-              {{ form['formProfile'].job(value=profile[4])}}
-  
-              {{ form['formProfile'].celular.label}}
-              {{ form['formProfile'].celular(value=profile[5])}}
-  
-              {{ form['formProfile'].country.label}}
-              {{ form['formProfile'].country(value=profile[6])}}
-  
-              {{ form['formProfile'].img.label}}
-              {{ form['formProfile'].img(value=profile[3])}}
-  
+              <p class="nota">* Envía el formulario para ver los cambios realizados</p>
+
               {{form['formProfile']. btnEnviar()}}
+
   
             </form>
   
-            <div class="box">
-              <img src="/static/img/profile/{{profile[7]}}" alt="profile">
-              <p>{{profile[9]}}</p>
-              <p>{{profile[4]}}</p>
-            </div>
+           
   
           </div>
           <!-- cambio de contraseña -->
@@ -156,6 +233,9 @@
     </section>
 
 
+<script src="{{url_for('static',filename='js/uploadFile.js')}}"></script>
 
+
+<script src="{{url_for('static',filename='js/deleteFile.js')}}"></script>
 
 {% endblock %}

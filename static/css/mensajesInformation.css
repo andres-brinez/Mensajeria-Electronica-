@@ -1,0 +1,11 @@
+#error{
+    color: red;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#success{
+    color: green;
+    font-size: 18px;
+    margin-bottom: 20px;
+}

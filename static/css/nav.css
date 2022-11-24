@@ -61,12 +61,12 @@ h1{
 #subseccion1 {
     box-sizing: border-box;
     position: absolute; 
-    top: 100%; left: 0px;  
+    top: 100%; left: 0;  
     background-color: #fff;;
     font:normal 0.8em arial;  
     padding: 2em 0.5em ; 
     cursor: default;
-    width: 100%;
+    /* width: 200px; */
     margin-top: 10px;
     text-align: center;
     display: none;

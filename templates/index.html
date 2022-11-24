@@ -1,7 +1,11 @@
 
 <!-- extender de  la plantilla base -->
 {%extends 'base.html'%} 
-{% block style %}<link rel="stylesheet" href="/static/css/index.css" />{% endblock %}> 
+
+{% block style %}
+<link rel="stylesheet" href="/static/css/index.css" />
+<link rel="stylesheet" href="/static/css/modal.css" />
+{% endblock %}> 
 
 {% block title%} Inicio {% endblock %}
 
@@ -92,7 +96,6 @@
                 <table>
                     <thead>
                         <tr>
-                            <th></th>    
                             <th>Remitente</th>
                             <th>Asunto</th>
                             <th>Fecha</th>
@@ -101,8 +104,7 @@
                     <tbody>
                 {% for message in messagesRecibidos %}
                     
-                    <tr>
-                        <td><input id="id-recibido"  type="hidden" value="{{message[0]}}"></td> <!-- guarda el id del mensaje --> 
+                    <tr class="mensaje-recibido" id="{{message[0]}} ">
                         <td>{{message[1]}}</td> 
                         <td>{{message[2]}}</td>
                         <td>{{message[3]}}</td>
@@ -115,6 +117,21 @@
             {% else %}
                 <p class="no-mensajes">No hay mensajes recibidos</p>
             {% endif %}
+
+            <div class="fondo_transparente">
+                <div class="modal">
+                    <div class="modal_cerrar">
+                        <span>x</span>
+                    </div>
+                    <div class="modal_titulo">Mensaje Recibido</div>
+                    <div >
+                        <p class="modal_mensaje" ></p>
+                    </div>
+                    <div class="modal_botones">
+                        <a href="sendMessage" class="boton">Responder </a>
+                    </div>
+                </div>
+            </div>   
 
         </div>
     </div>
@@ -132,7 +149,7 @@
 <script src="{{url_for('static',filename='js/Mensajes.js')}}"></script>
 <!-- muestrá el menú despegable -->
 
-
+<!-- para el menú -->
 <script>
     
         function ver(n) {
@@ -144,5 +161,55 @@
         
 </script>
 
+
+<script>
+    // para mostrar el mensaje seleccionado 
+    let mensaje = document.querySelectorAll('.mensaje-recibido');
+    mensaje.forEach(mensaje => {
+
+        mensaje.addEventListener('click', () => {
+
+            let id =parseInt( mensaje.getAttribute('id'))
+
+    
+            // obtiene los mensajes envíados desde python por  medio de jinja           
+            function datos(data) {
+                // para mostrarlo en formato array
+                return data;
+            }
+            let mensajesRecibidos=datos({{ json|safe }})
+ 
+            
+            // obtiene el mensaje seleccionado
+            for (let i = 0; i < mensajesRecibidos.length; i++) {
+                // compara los id para mostrar el mensaje seleccionado
+                if(mensajesRecibidos[i][0]===id){
+                    let modal_mensaje=document.getElementsByClassName('modal_mensaje')[0]
+                    modal_mensaje.textContent =mensajesRecibidos[i][5]
+                 }
+              }
+
+            // abrir ventana
+            let modal=document.getElementsByClassName('fondo_transparente')[0]
+            console.log(modal)
+            modal.style.display='block'
+        
+                
+    
+        })
+    })
+
+    // Cuando el usuario hace click en el botón, se cierra el modal
+    let cerrar=document.getElementsByClassName('modal_cerrar')[0]
+    cerrar.addEventListener('click',()=>{
+        let modal=document.getElementsByClassName('fondo_transparente')[0]
+        modal.style.display='none'
+    })
+</script>
+
+<script type="text/javascript">
+
+
 {% endblock %}
+
 
